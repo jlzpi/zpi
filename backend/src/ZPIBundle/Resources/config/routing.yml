@@ -1,0 +1,3 @@
+zpi_controller:
+    type: rest
+    resource: ZPIBundle\Controller\ZPIController
