@@ -88,4 +88,21 @@ class ZPIController extends FOSRestController {
 			'Test2' => $test2
 		));
 	}
+	
+	/**
+	 *	Test
+	 *  @Rest\Get("/test/costam")
+	 *	
+	 *	@ApiDoc(
+	 *		section="test"
+     *  )
+	 */
+	public function testcostamAction(Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		
+		
+		return new JsonResponse(array(
+			'Test' => 'hejo'
+		));
+	}
 }
