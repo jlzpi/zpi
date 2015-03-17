@@ -71,3 +71,30 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+<<<<<<< HEAD
+=======
+
+sensio_framework_extra:
+    view:
+        annotations: false
+    
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+        formats:
+            xml: true
+            json : true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+    routing_loader:
+        default_format: json
+
+nelmio_api_doc: ~
+>>>>>>> eee1e1fe08ef26caf7b1152e17d341cd80e98023
