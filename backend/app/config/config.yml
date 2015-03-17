@@ -71,8 +71,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-<<<<<<< HEAD
-=======
 
 sensio_framework_extra:
     view:
@@ -97,4 +95,3 @@ fos_rest:
         default_format: json
 
 nelmio_api_doc: ~
->>>>>>> eee1e1fe08ef26caf7b1152e17d341cd80e98023

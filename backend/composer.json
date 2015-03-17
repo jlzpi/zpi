@@ -20,14 +20,9 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/rest-bundle": "~1.5",
-<<<<<<< HEAD
-        "jms/serializer-bundle": "0.13.*",
-        "nelmio/api-doc-bundle": "~2.8"
-=======
         "jms/serializer-bundle": "~0.13",
         "nelmio/api-doc-bundle": "~2.8",
         "doctrine/doctrine-fixtures-bundle": "~2.2"
->>>>>>> eee1e1fe08ef26caf7b1152e17d341cd80e98023
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
