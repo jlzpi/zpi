@@ -1,0 +1,13 @@
+/backend/web/bundles/
+/backend/app/bootstrap.php.cache
+/backend/app/cache/*
+/backend/app/config/parameters.yml
+/backend/app/logs/*
+!backend/app/cache/.gitkeep
+!backend/app/logs/.gitkeep
+/backend/app/phpunit.xml
+/backend/build/
+/backend/vendor/
+/backend/bin/
+/backend/app/SymfonyStandard/*
+/composer.phar
