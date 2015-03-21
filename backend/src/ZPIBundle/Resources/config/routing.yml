@@ -1,3 +1,6 @@
 zpi_controller:
     type: rest
     resource: ZPIBundle\Controller\ZPIController
+logowanie_controller:
+    type: rest
+    resource: ZPIBundle\Controller\LogowanieController
