@@ -6,22 +6,36 @@ use Doctrine\ORM\EntityRepository;
 use ZPIBundle\Entity\Question;
 
 class QuestionRepository extends EntityRepository
-{
-/*    public function myFind($id)
-    {
-		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Test');
+{	
+	public function findQuestionsByCategory($c) {
+		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
 		
 		$query = $rep
-			->createQueryBuilder('Test')
-			->select('Test')
-			->where('Test.price = :price')
-			->setParameter('price', $p)
+			->createQueryBuilder('Question')
+			->select('Question')
+			->where('Question.category = :category')
+			->setParameter('category', $c)
 		;
 		
-        return $query
+		return $query
 			->getQuery()
-			->getOneOrNullResult() //<- jeden ziomek albo null
-			//->getResult() <- tablica
+			->getResult()
 		;
-    }*/
+	}
+	
+	public function findAllQuestions() {
+		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
+		
+		$query = $rep
+			->createQueryBuilder('Question')
+			->select('Question')
+		;
+		
+		return $query
+			->getQuery()
+			//->getArrayResult()
+			//->getOneOrNullResult()
+			->getResult()
+		;
+	}
 }
