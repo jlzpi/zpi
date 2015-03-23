@@ -1,3 +1,3 @@
-zpi_controller:
+login_controller:
     type: rest
-    resource: ZPIBundle\Controller\ZPIController
+    resource: ZPIBundle\Controller\LoginController

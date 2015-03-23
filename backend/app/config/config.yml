@@ -95,3 +95,8 @@ fos_rest:
         default_format: json
 
 nelmio_api_doc: ~
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: ZPIBundle\Entity\User
