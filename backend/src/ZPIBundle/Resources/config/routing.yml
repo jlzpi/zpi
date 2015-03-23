@@ -4,3 +4,6 @@ zpi_controller:
 showPicture_controller:
     type: rest
     resource: ZPIBundle\Controller\ShowPictureController
+chooseCategory_controller:
+    type: rest
+    resource: ZPIBundle\Controller\ChooseCategoryController
