@@ -9,4 +9,5 @@
 /backend/build/
 /backend/vendor/
 /backend/bin/
+/backend/app/SymfonyStandard/*
 /composer.phar
