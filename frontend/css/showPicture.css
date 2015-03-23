@@ -9,3 +9,7 @@ img {
 	margin: 0 auto; 
 	display: none;
 }
+
+#picture {
+	height: 512px;
+}

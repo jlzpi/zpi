@@ -34,12 +34,12 @@ class LoginController extends FOSRestController {
 		
 		$user = $um->findUserByUserName($request->request->get('login'));
 		if(!$user instanceof User){
-            throw $this->createNotFoundException("User not found");
+            throw $this->createNotFoundException("Wrong login or password");
         }
 		
 		$encoder = $this->get('security.encoder_factory')->getEncoder($user);
         if(!$encoder || !$encoder->isPasswordValid($user->getPassword(), $request->request->get('password'), $user->getSalt())) {
-            throw $this->createNotFoundException("Wrong password");
+            throw $this->createNotFoundException("Wrong login or password");
         }
 		
         $security = $this->get('security.context');
@@ -67,6 +67,66 @@ class LoginController extends FOSRestController {
 		
 		return new JsonResponse(array(
 			'result' => 'success'
+		));
+	}
+	
+	/**
+	 *	Czy uczen
+	 *  @Rest\Get("/isStudent")
+	 *	
+	 *	@ApiDoc(
+	 *		section="logowanie"
+     *  )
+	 */
+	public function isStudentAction(Request $request) {
+        $security = $this->get('security.context');
+		$user = $security->getToken()->getUser();
+		
+		if(!$user instanceof User) $result = false;
+		else $result = $user->hasRole('ROLE_STUDENT');
+				
+		return new JsonResponse(array(
+			'result' => $result
+		));
+	}
+	
+	/**
+	 *	Czy nauczyciel
+	 *  @Rest\Get("/isTeacher")
+	 *	
+	 *	@ApiDoc(
+	 *		section="logowanie"
+     *  )
+	 */
+	public function isTeacherAction(Request $request) {
+        $security = $this->get('security.context');
+		$user = $security->getToken()->getUser();
+		
+		if(!$user instanceof User) $result = false;
+		else $result = $user->hasRole('ROLE_TEACHER');
+				
+		return new JsonResponse(array(
+			'result' => $result
+		));
+	}
+	
+	/**
+	 *	get username
+	 *  @Rest\Get("/getUsername")
+	 *	
+	 *	@ApiDoc(
+	 *		section="logowanie"
+     *  )
+	 */
+	public function getUsernameAction(Request $request) {
+        $security = $this->get('security.context');
+		$user = $security->getToken()->getUser();
+		
+		if(!$user instanceof User) $result = null;
+		else $result = $user->getUsername();
+				
+		return new JsonResponse(array(
+			'result' => $result
 		));
 	}
 }
