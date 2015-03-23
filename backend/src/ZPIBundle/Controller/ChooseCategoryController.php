@@ -35,11 +35,11 @@ class ChooseCategoryController extends FOSRestController {
 		}
 		else {			
 			for($i=0;$i<count($categories);$i++){
-				$tablica[$categories[$i]->getId()] = $categories[$i]->getName();
+				$tab[$categories[$i]->getId()] = $categories[$i]->getName();
 			}
 			return new JsonResponse(array(
 				'FindNotNull' => true,			
-				'Categories' => $tablica
+				'Categories' => $tab
 			));
 		}
 	}
