@@ -16,19 +16,48 @@ use ZPIBundle\Entity\QuestionRepository;
 class ShowPictureController extends FOSRestController {
 
 	/**
-	 *  Zwróć obrazek do wyświetlenia
-	 *  @Rest\Get("/getQuestionToDisplay")
+	 *  Zwróć randomowy obrazek do wyświetlenia
+	 *  @Rest\Get("/getRandomQuestionToDisplay")
 	 *
 	 *  @ApiDoc(
-	 *		section="wyświetlanie obrazka"
+	 *		section="wyświetlanie randomowego obrazka"
 	 *  )
 	 *
-	 *	@Secure(roles="ROLE_STUDENT")
+	 *	
 	 */
-	public function getQuestionToDisplayAction(Request $request) {
+	public function getRandomQuestionToDisplayAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
 
 		$questions = $em->getRepository('ZPIBundle:Question')->findAllQuestions();
+		
+		if (count($questions) == 0) {
+			return new JsonResponse(array(
+				'FindNotNull' => false
+			));
+		}
+		else {
+			$randomInt = rand(0, count($questions)-1);
+			
+			return new JsonResponse(array(
+				'FindNotNull' => true,
+				'Question' => $questions[$randomInt]->getQuestion(),
+				'PictureDir' => $questions[$randomInt]->getPicture()
+			));
+		}
+	}
+	/**
+	 *  Zwróć obrazek z odpowiedniej kategorii do wyświetlenia
+	 *  @Rest\Get("/getQuestionFromCategoryToDisplay/{category}")
+	 *
+	 *  @ApiDoc(
+	 *		section="wyświetlanie obrazka z wybranej kategorii"
+	 *  )
+	 *  @Secure(roles="ROLE_STUDENT")
+	 */
+	public function getQuestionFromCategoryToDisplayAction(Request $request, $category) {
+		$em = $this->getDoctrine()->getManager();
+
+		$questions = $em->getRepository('ZPIBundle:Question')->findQuestionsByCategory($category);
 		
 		if (count($questions) == 0) {
 			return new JsonResponse(array(
