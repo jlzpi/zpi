@@ -2,31 +2,21 @@ var ApiUrl = '../../backend/web/app_dev.php/api/';
 var PictureUrl = '../../files/';
 
 var User = {
-	isStudent: function() {
-		var ajax = $.ajax({
-			method: 'GET',
-			url: ApiUrl+'isStudent',
-			dataType: 'json',
-			async: false
-		});
-		return ajax.status == 200 && ajax.responseJSON.result;
-	},
-	isTeacher: function() {
-		var ajax = $.ajax({
-			method: 'GET',
-			url: ApiUrl+'isTeacher',
-			dataType: 'json',
-			async: false
-		});
-		return ajax.status == 200 && ajax.responseJSON.result;
-	},
-	getUsername: function() {
-		var ajax = $.ajax({
-			method: 'GET',
-			url: ApiUrl+'getUsername',
-			dataType: 'json',
-			async: false
-		});
-		return ajax.responseJSON.result;
-	}
+	isStudent: false,
+	isTeacher: false,
+	username: ''
 };
+
+$.holdReady(true);
+
+$.ajax({
+	method: 'GET',
+	url: ApiUrl + 'getUser',
+	dataType: 'json'
+}).done(function(data) {
+	User.username = data.user.username;
+	User.isStudent = $.inArray('ROLE_STUDENT', data.user.roles)!=-1;
+	User.isTeacher = $.inArray('ROLE_TEACHER', data.user.roles)!=-1;
+}).always(function() {
+	$.holdReady(false);
+});

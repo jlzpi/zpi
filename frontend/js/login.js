@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	if(typeof User.getUsername() === 'undefined' || !User.getUsername()) {
+	if(!User.username) {
 		$('#login').css('display', 'block');
 		$('#logout').css('display', 'none');
 	
@@ -15,7 +15,7 @@ $(document).ready(function() {
 				},
 				dataType: 'json'
 			}).done(function(data) {
-				if(User.isStudent()) $(location).attr('href', 'showPicture.html');
+				if($.inArray('ROLE_STUDENT', data.user.roles)!=-1) $(location).attr('href', 'showPicture.html');
 				//else if(User.isTeacher()) $(location).attr('href', '../index.html'); <- to sie jeszcze zmieni jak dojdzie crud dla nauczyciela
 				else location.reload(); // <- puki co jest to
 			}).fail(function(a,b,c) {
@@ -30,7 +30,7 @@ $(document).ready(function() {
 		$('#login').css('display', 'none');
 		$('#logout').css('display', 'block');
 		
-		$('#user').html(User.getUsername());
+		$('#user').html(User.username);
 		
 		$('#logoutButton').click(function() {
 			$.ajax({
