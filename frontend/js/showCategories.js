@@ -19,6 +19,10 @@
 			else {
 				alert('Nie znaleziono kategorii.');
 			}
+		},
+		error: function(syf, costam, message) {
+			if(message == 'Forbidden') alert('Nie jestes zalogowany jako uczen');
+			else alert('Nieznany blad');
 		}
 	});
 }

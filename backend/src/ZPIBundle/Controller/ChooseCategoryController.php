@@ -16,7 +16,7 @@ use ZPIBundle\Entity\CategoryRepository;
 class ChooseCategoryController extends FOSRestController {
 
 	/**
-	 *  Wyświetl kategorię
+	 *  Wyświetl kategorie
 	 *  @Rest\Get("/getCategoriesToDisplay")
 	 *
 	 *  @ApiDoc(
