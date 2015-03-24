@@ -5,9 +5,9 @@ function func() {
 }
 
 function myFunction() {
-	//var list = document.getElementById("list");
-	//var idCategory = list.options[list.selectedIndex].name;
+	var list = document.getElementById("list");
+	var idCategory = list.options[list.selectedIndex].name;
+	var src = 'showPicture.php?category=' + idCategory;
 	
-	window.open('showPicture.html?category=1');
-    //$(location).attr('href', 'showPicture.html');
+    $(location).attr('href', src);
 }

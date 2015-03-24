@@ -13,6 +13,8 @@
 					option.name = i;
 					x.add(option);
 				}
+				$('#list').css('display', 'inline');
+				$('#choose').css('display', 'inline');
 			}
 			else {
 				alert('Nie znaleziono kategorii.');

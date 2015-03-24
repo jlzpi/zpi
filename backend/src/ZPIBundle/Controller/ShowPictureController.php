@@ -20,10 +20,10 @@ class ShowPictureController extends FOSRestController {
 	 *  @Rest\Get("/getRandomQuestionToDisplay")
 	 *
 	 *  @ApiDoc(
-	 *		section="wyświetlanie randomowego obrazka"
+	 *		section="wyświetlanie obrazka"
 	 *  )
 	 *
-	 *	
+	 *	@Secure(roles="ROLE_STUDENT")
 	 */
 	public function getRandomQuestionToDisplayAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
@@ -41,7 +41,8 @@ class ShowPictureController extends FOSRestController {
 			return new JsonResponse(array(
 				'FindNotNull' => true,
 				'Question' => $questions[$randomInt]->getQuestion(),
-				'PictureDir' => $questions[$randomInt]->getPicture()
+				'PictureDir' => $questions[$randomInt]->getPicture(),
+				'CategoryName' => $questions[$randomInt]->getCategory()->getName()
 			));
 		}
 	}
@@ -50,7 +51,7 @@ class ShowPictureController extends FOSRestController {
 	 *  @Rest\Get("/getQuestionFromCategoryToDisplay/{category}")
 	 *
 	 *  @ApiDoc(
-	 *		section="wyświetlanie obrazka z wybranej kategorii"
+	 *		section="wyświetlanie obrazka"
 	 *  )
 	 *  @Secure(roles="ROLE_STUDENT")
 	 */
@@ -70,7 +71,8 @@ class ShowPictureController extends FOSRestController {
 			return new JsonResponse(array(
 				'FindNotNull' => true,
 				'Question' => $questions[$randomInt]->getQuestion(),
-				'PictureDir' => $questions[$randomInt]->getPicture()
+				'PictureDir' => $questions[$randomInt]->getPicture(),
+				'CategoryName' => $questions[$randomInt]->getCategory()->getName()
 			));
 		}
 	}

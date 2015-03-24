@@ -20,8 +20,9 @@
 	});
 });*/
 
-function showPicture(var idCategory) {
-	$.ajax({
+function showPicture(category) {
+	alert("jajaja");
+/*	$.ajax({
 		type: 'GET',
 		url: ApiUrl+'getQuestionFromCategoryToDisplay/' + idCategory + '.json',
 		dataType: 'json',
@@ -39,5 +40,5 @@ function showPicture(var idCategory) {
 			if(message == 'Forbidden') alert('Nie jestes zalogowany jako uczen');
 			else alert('Nieznany blad');
 		}
-	});
-};
+	});*/
+}

@@ -15,7 +15,7 @@ $(document).ready(function() {
 				},
 				dataType: 'json'
 			}).done(function(data) {
-				if(User.isStudent()) $(location).attr('href', 'showPicture.html');
+				if(User.isStudent()) $(location).attr('href', 'chooseCategory.html');
 				//else if(User.isTeacher()) $(location).attr('href', '../index.html'); <- to sie jeszcze zmieni jak dojdzie crud dla nauczyciela
 				else location.reload(); // <- puki co jest to
 			}).fail(function(a,b,c) {
