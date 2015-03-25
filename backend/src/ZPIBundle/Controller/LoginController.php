@@ -7,8 +7,10 @@ use JMS\Serializer\Annotation as JMS;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use FOS\RestBundle\Controller\Annotations\View;
 
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
@@ -28,6 +30,8 @@ class LoginController extends FOSRestController {
      *  	    {"name"="password", "dataType"="string", "required"=true, "description"="haslo"}
      * 	 	}
      *  )
+	 *
+	 *	@View(serializerGroups={"username_and_roles"})
 	 */
 	public function loginAction(Request $request) {
 		$um = $this->get('fos_user.user_manager');
@@ -48,9 +52,10 @@ class LoginController extends FOSRestController {
         $token = new UsernamePasswordToken($user, null, $providerKey, $roles);
         $security->setToken($token);
 		
-		return new JsonResponse(array(
-			'result' => 'success'
-		));
+		return array(
+			'result' => 'success',
+			'user' => $user
+		);
 	}
 	
 	/**
@@ -65,68 +70,31 @@ class LoginController extends FOSRestController {
         $security = $this->get('security.context');
         $security->setToken(null);
 		
-		return new JsonResponse(array(
+		return array(
 			'result' => 'success'
-		));
+		);
 	}
 	
 	/**
-	 *	Czy uczen
-	 *  @Rest\Get("/isStudent")
+	 *	get user
+	 *  @Rest\Get("/getUser")
 	 *	
 	 *	@ApiDoc(
 	 *		section="logowanie"
      *  )
-	 */
-	public function isStudentAction(Request $request) {
-        $security = $this->get('security.context');
-		$user = $security->getToken()->getUser();
-		
-		if(!$user instanceof User) $result = false;
-		else $result = $user->hasRole('ROLE_STUDENT');
-				
-		return new JsonResponse(array(
-			'result' => $result
-		));
-	}
-	
-	/**
-	 *	Czy nauczyciel
-	 *  @Rest\Get("/isTeacher")
-	 *	
-	 *	@ApiDoc(
-	 *		section="logowanie"
-     *  )
-	 */
-	public function isTeacherAction(Request $request) {
-        $security = $this->get('security.context');
-		$user = $security->getToken()->getUser();
-		
-		if(!$user instanceof User) $result = false;
-		else $result = $user->hasRole('ROLE_TEACHER');
-				
-		return new JsonResponse(array(
-			'result' => $result
-		));
-	}
-	
-	/**
-	 *	get username
-	 *  @Rest\Get("/getUsername")
-	 *	
-	 *	@ApiDoc(
-	 *		section="logowanie"
-     *  )
+	 *
+	 *	@View(serializerGroups={"username_and_roles"})
 	 */
 	public function getUsernameAction(Request $request) {
         $security = $this->get('security.context');
 		$user = $security->getToken()->getUser();
 		
-		if(!$user instanceof User) $result = null;
-		else $result = $user->getUsername();
+		if(!$user instanceof User) {
+			throw $this->createNotFoundException("User not found");
+		}
 				
-		return new JsonResponse(array(
-			'result' => $result
-		));
+		return array(
+			'user' => $user
+		);
 	}
 }

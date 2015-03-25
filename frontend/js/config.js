@@ -2,31 +2,31 @@ var ApiUrl = '../../backend/web/app_dev.php/api/';
 var PictureUrl = '../../files/';
 
 var User = {
-	isStudent: function() {
-		var ajax = $.ajax({
-			method: 'GET',
-			url: ApiUrl+'isStudent',
-			dataType: 'json',
-			async: false
-		});
-		return ajax.status == 200 && ajax.responseJSON.result;
-	},
-	isTeacher: function() {
-		var ajax = $.ajax({
-			method: 'GET',
-			url: ApiUrl+'isTeacher',
-			dataType: 'json',
-			async: false
-		});
-		return ajax.status == 200 && ajax.responseJSON.result;
-	},
-	getUsername: function() {
-		var ajax = $.ajax({
-			method: 'GET',
-			url: ApiUrl+'getUsername',
-			dataType: 'json',
-			async: false
-		});
-		return ajax.responseJSON.result;
-	}
+	isStudent: false,
+	isTeacher: false,
+	username: ''
 };
+
+function getGET(param) {
+    var pageURL = window.location.search.substring(1);
+    var URLVariables = pageURL.split('&');
+    for (var i=0; i<URLVariables.length; i++) {
+        var parameterName = URLVariables[i].split('=');
+        if (parameterName[0] == param) {
+            return parameterName[1];
+        }
+    }
+}
+
+$.holdReady(true);
+$.ajax({
+	method: 'GET',
+	url: ApiUrl + 'getUser',
+	dataType: 'json'
+}).done(function(data) {
+	User.username = data.user.username;
+	User.isStudent = $.inArray('ROLE_STUDENT', data.user.roles)!=-1;
+	User.isTeacher = $.inArray('ROLE_TEACHER', data.user.roles)!=-1;
+}).always(function() {
+	$.holdReady(false);
+});

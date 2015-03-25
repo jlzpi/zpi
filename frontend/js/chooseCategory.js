@@ -1,13 +1,13 @@
-﻿window.addEventListener("load", func, false);
-
-function func() {
-	document.getElementById("choose").addEventListener("click", myFunction);
-}
-
-function myFunction() {
+﻿function myFunction() {
 	var list = document.getElementById("list");
 	var idCategory = list.options[list.selectedIndex].name;
-	var src = 'showPicture.php?category=' + idCategory;
+	var src = 'showPicture.html?category=' + idCategory;
 	
     $(location).attr('href', src);
 }
+
+$(document).ready(function() {
+	$('#choose').click(function() {
+		myFunction();
+	});
+});
