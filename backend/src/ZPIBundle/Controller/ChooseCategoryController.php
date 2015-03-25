@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use ZPIBundle\Entity\Category;
 use ZPIBundle\Entity\CategoryRepository;
@@ -22,13 +23,15 @@ class ChooseCategoryController extends FOSRestController {
 	 *  @ApiDoc(
 	 *		section="wybieranie kategorii"
 	 *  )
+	 *
+	 *	@Secure(roles="ROLE_STUDENT")
 	 */
 	public function getCategoriesToDisplayAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
 
 		$categories = $em->getRepository('ZPIBundle:Category')->findAllCategories();
 		
-		if (count($categories) == 0) {
+		if (is_null($categories) && empty($categories)) {
 			return new JsonResponse(array(
 				'FindNotNull' => false
 			));
