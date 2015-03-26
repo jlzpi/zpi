@@ -7,8 +7,18 @@ var User = {
 	username: ''
 };
 
-$.holdReady(true);
+function getGET(param) {
+    var pageURL = window.location.search.substring(1);
+    var URLVariables = pageURL.split('&');
+    for (var i=0; i<URLVariables.length; i++) {
+        var parameterName = URLVariables[i].split('=');
+        if (parameterName[0] == param) {
+            return parameterName[1];
+        }
+    }
+}
 
+$.holdReady(true);
 $.ajax({
 	method: 'GET',
 	url: ApiUrl + 'getUser',
