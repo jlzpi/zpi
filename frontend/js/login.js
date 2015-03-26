@@ -16,8 +16,9 @@ $(document).ready(function() {
 				dataType: 'json'
 			}).done(function(data) {
 				if($.inArray('ROLE_STUDENT', data.user.roles)!=-1) $(location).attr('href', 'showPicture.html');
-				//else if(User.isTeacher()) $(location).attr('href', '../index.html'); <- to sie jeszcze zmieni jak dojdzie crud dla nauczyciela
-				else location.reload(); // <- puki co jest to
+					//else if(User.isTeacher()) $(location).attr('href', '../index.html'); <- to sie jeszcze zmieni jak dojdzie crud dla nauczyciela
+				else 
+				location.reload(); // <- puki co jest to
 			}).fail(function(a,b,c) {
 				var message = a.responseJSON.error.exception[0].message;
 				alert('Blad podczas logowania: '+message);
