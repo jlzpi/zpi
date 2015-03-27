@@ -1,0 +1,24 @@
+div#speechBox {
+	width: 50%;
+	margin: 0 auto;
+	padding: 30px;
+}
+
+button {
+
+	background-color: lightcyan;
+	padding: 10px;
+}
+
+#toggleMic {
+ 	background-image: url("../../files/icons/mikro.png");
+ 	background-repeat: no-repeat;
+ 	background-size: contain;
+ 	padding-left: 30px;
+}
+
+#micIcon {
+	src: url("mikro.png");
+	height: 200px;
+	width: 200px;
+}
