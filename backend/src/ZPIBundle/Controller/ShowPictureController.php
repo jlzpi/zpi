@@ -76,4 +76,35 @@ class ShowPictureController extends FOSRestController {
 			));
 		}
 	}
+	
+		/**
+	 *  Zwróć zadaną ilosć obrazków z odpowiedniej kategorii
+	 *  @Rest\Get("/getQuestionFromCategoryToDisplay/{category}")
+	 *
+	 *  @ApiDoc(
+	 *		section="wyświetlanie obrazka"
+	 *  )
+	 *  @Secure(roles="ROLE_STUDENT")
+	 */
+	public function getQuestionFromCategoryToDisplayAction(Request $request, $category) {
+		$em = $this->getDoctrine()->getManager();
+
+		$questions = $em->getRepository('ZPIBundle:Question')->findQuestionsByCategory($category);
+		
+		if (count($questions) == 0) {
+			return new JsonResponse(array(
+				'FindNotNull' => false
+			));
+		}
+		else {
+			$randomInt = rand(0, count($questions)-1);
+			
+			return new JsonResponse(array(
+				'FindNotNull' => true,
+				'Question' => $questions[$randomInt]->getQuestion(),
+				'PictureDir' => $questions[$randomInt]->getPicture(),
+				'CategoryName' => $questions[$randomInt]->getCategory()->getName()
+			));
+		}
+	}
 }
