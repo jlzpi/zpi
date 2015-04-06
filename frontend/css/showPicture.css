@@ -8,6 +8,10 @@ img {
 	display: none;
 }
 
+#formNavigate {
+	display: none;
+}
+
 #picture {
 	height: 512px;
 }

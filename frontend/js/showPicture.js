@@ -1,20 +1,38 @@
-﻿$.ajax({
+﻿const lessonLength = 3;
+
+$.ajax({
 	type: 'GET',
-	url: ApiUrl+'getQuestionFromCategoryToDisplay/' + getGET('category'),
+	url: ApiUrl+'getQuestionsFromCategoryToDisplay/' + getGET('category') + '/' + lessonLength,
 	dataType: 'json'
 }).done(function(json) {
-		if (json['FindNotNull']) {
-			var question = json;
-		}
-		else {
-			alert('Nie znaleziono kategorii.');
-		}
+	if (json['FindNotNull']) {
+		var questions = json.Questions;
+		var directories = json.PictureDir;
+		var actual = 0;
+	}
+	else {
+		alert('Nie znaleziono kategorii lub zbyt mało obrazków.');
+	}
 
 	$(document).ready(function() {
-		$('#category').html('Category: ' + question.CategoryName);
-		$('#question').html(question.Question);
-		$('#picture').attr('src', PictureUrl+question.PictureDir);
+		$('#question').html(questions[actual]);
+		$('#picture').attr('src', PictureUrl+directories[actual]);
 		$('#picture').css('display', 'block');
+		$('#formNavigate').css('display', 'block');
+		
+		$('#next').click(function() {
+			if (actual < lessonLength - 1) {
+				$('#question').html(questions[++actual]);
+				$('#picture').attr('src', PictureUrl+directories[actual]);
+			}
+		});
+
+		$('#previous').click(function() {
+			if (actual > 0) {
+				$('#question').html(questions[--actual]);
+				$('#picture').attr('src', PictureUrl+directories[actual]);
+			}
+		});
 	});
 	
 }).fail(function(a,b,message) {
