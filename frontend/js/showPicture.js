@@ -8,32 +8,32 @@ $.ajax({
 	if (json['FindNotNull']) {
 		var questions = json.Questions;
 		var directories = json.PictureDir;
-		var actual = 0;
+		var index = 0;
+		
+		$(document).ready(function() {
+			$('#question').html(questions[index]);
+			$('#picture').attr('src', PictureUrl+directories[index]);
+			$('#picture').css('display', 'block');
+			$('#buttons').css('display', 'block');
+		
+			$('#next').click(function() {
+				if (index < lessonLength - 1) {
+					$('#question').html(questions[++index]);
+					$('#picture').attr('src', PictureUrl+directories[index]);
+				}
+			});
+	
+			$('#previous').click(function() {
+				if (index > 0) {
+					$('#question').html(questions[--index]);
+					$('#picture').attr('src', PictureUrl+directories[index]);
+				}
+			});
+		});
 	}
 	else {
-		alert('Nie znaleziono kategorii lub zbyt mało obrazków.');
+		alert('Zbyt mało obrazków.');
 	}
-
-	$(document).ready(function() {
-		$('#question').html(questions[actual]);
-		$('#picture').attr('src', PictureUrl+directories[actual]);
-		$('#picture').css('display', 'block');
-		$('#formNavigate').css('display', 'block');
-		
-		$('#next').click(function() {
-			if (actual < lessonLength - 1) {
-				$('#question').html(questions[++actual]);
-				$('#picture').attr('src', PictureUrl+directories[actual]);
-			}
-		});
-
-		$('#previous').click(function() {
-			if (actual > 0) {
-				$('#question').html(questions[--actual]);
-				$('#picture').attr('src', PictureUrl+directories[actual]);
-			}
-		});
-	});
 	
 }).fail(function(a,b,message) {
 		if(message == 'Forbidden') alert('Nie jestes zalogowany jako uczen');
