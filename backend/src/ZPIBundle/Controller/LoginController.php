@@ -92,7 +92,7 @@ class LoginController extends FOSRestController {
 		if(!$user instanceof User) {
 			throw $this->createNotFoundException("User not found");
 		}
-				
+		
 		return array(
 			'user' => $user
 		);

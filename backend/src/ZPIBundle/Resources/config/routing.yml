@@ -1,9 +1,15 @@
 login_controller:
     type: rest
     resource: ZPIBundle\Controller\LoginController
+
 showPicture_controller:
     type: rest
     resource: ZPIBundle\Controller\ShowPictureController
+
 chooseCategory_controller:
     type: rest
     resource: ZPIBundle\Controller\ChooseCategoryController
+
+checkAnswer_controller:
+    type: rest
+    resource: ZPIBundle\Controller\CheckAnswerController

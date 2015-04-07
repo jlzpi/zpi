@@ -7,6 +7,8 @@ var User = {
 	username: ''
 };
 
+var Global = {};
+
 function getGET(param) {
     var pageURL = window.location.search.substring(1);
     var URLVariables = pageURL.split('&');

@@ -38,4 +38,21 @@ class QuestionRepository extends EntityRepository
 			->getResult()
 		;
 	}
+	
+	public function getQuestionWithAnswers($id) {
+		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
+		
+		$query = $rep
+			->createQueryBuilder('Question')
+			->select('Question, Answer')
+			->where('Question.id = :id')
+			->leftJoin('Question.answers', 'Answer')
+			->setParameter('id', $id)
+		;
+		
+		return $query
+			->getQuery()
+			->getOneOrNullResult()
+		;
+	}
 }

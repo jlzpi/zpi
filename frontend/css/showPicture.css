@@ -13,7 +13,8 @@ img {
 }
 
 #picture {
-	height: 512px;
+	height: 312px;
+	width: auto;
 }
 
 #question {
@@ -21,3 +22,4 @@ img {
 	font-weight: bold;
 	font-size: 40px;
 }
+

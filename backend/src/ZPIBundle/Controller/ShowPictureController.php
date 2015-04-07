@@ -70,6 +70,7 @@ class ShowPictureController extends FOSRestController {
 			
 			return new JsonResponse(array(
 				'FindNotNull' => true,
+				'questionId' => $questions[$randomInt]->getId(),
 				'Question' => $questions[$randomInt]->getQuestion(),
 				'PictureDir' => $questions[$randomInt]->getPicture(),
 				'CategoryName' => $questions[$randomInt]->getCategory()->getName()
