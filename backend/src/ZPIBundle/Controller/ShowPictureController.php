@@ -86,6 +86,7 @@ class ShowPictureController extends FOSRestController {
 	 *		section="wyświetlanie obrazka"
 	 *  )
 	 *  
+	 *	@Secure(roles="ROLE_STUDENT")
 	 */
 	public function getQuestionsFromCategoryToDisplayAction(Request $request, $category, $howMany) {
 		$em = $this->getDoctrine()->getManager();
@@ -117,7 +118,8 @@ class ShowPictureController extends FOSRestController {
 	 *  @ApiDoc(
 	 *		section="wyświetlanie obrazka"
 	 *  )
-	 *  
+	 *
+	 *  @Secure(roles="ROLE_STUDENT")
 	 */
 	public function getRandomQuestionsToDisplayAction(Request $request, $howMany) {
 		$em = $this->getDoctrine()->getManager();
