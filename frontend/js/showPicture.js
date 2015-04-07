@@ -15,6 +15,7 @@
 		$('#question').html(question.Question);
 		$('#picture').attr('src', PictureUrl+question.PictureDir);
 		$('#picture').css('display', 'block');
+		Global.questionId = question.questionId;
 	});
 	
 }).fail(function(a,b,message) {
