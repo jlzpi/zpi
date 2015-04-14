@@ -23,7 +23,24 @@ class QuestionRepository extends EntityRepository
 		;
 	}
 	
-	public function findAllQuestions() {
+	public function findRandomQuestionsByCategory($c) {
+		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
+		
+		$query = $rep
+			->createQueryBuilder('Question')
+			->select('Question, RAND() AS HIDDEN rand')
+			->where('Question.category = :category')
+			->setParameter('category', $c)
+			->orderBy('rand')
+		;
+		
+		return $query
+			->getQuery()
+			->getResult()
+		;
+	}
+	
+	public function findQuestions() {
 		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
 		
 		$query = $rep
@@ -33,8 +50,6 @@ class QuestionRepository extends EntityRepository
 		
 		return $query
 			->getQuery()
-			//->getArrayResult()
-			//->getOneOrNullResult()
 			->getResult()
 		;
 	}
@@ -55,4 +70,19 @@ class QuestionRepository extends EntityRepository
 			->getOneOrNullResult()
 		;
 	}
+	
+	public function findRandomQuestions() {
+		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
+		
+		$query = $rep
+			->createQueryBuilder('Question')
+			->select('Question, RAND() AS HIDDEN rand')
+			->orderBy('rand')
+		;
+		
+		return $query
+			->getQuery()
+			->getResult()
+		;
+	}	
 }

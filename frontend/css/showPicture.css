@@ -8,14 +8,29 @@ img {
 	display: none;
 }
 
+#buttons {
+	display: none;
+}
+
 #picture {
 	height: 312px;
 	width: auto;
 }
 
 #question {
-	margin-bottom: 1cm;
+	margin-bottom: 10px;
 	font-weight: bold;
 	font-size: 40px;
 }
 
+#buttons .button {
+	height: 50px;
+	width: 100px;
+	margin: 10px 0;
+	font-size: 20px;
+	border-radius: 10px;
+	background: -webkit-radial-gradient(#66FF33, #55AA00);
+	background: -o-radial-gradient(#66FF33, #55AA00);
+	background: -moz-radial-gradient(#66FF33, #55AA00);
+	background: radial-gradient(#66FF33, #55AA00);
+}
