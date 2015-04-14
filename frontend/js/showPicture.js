@@ -23,6 +23,7 @@ $.ajax({
 					$('#question').html(questions[++index]);
 					$('#picture').attr('src', PictureUrl+directories[index]);
 					Global.questionId = ids[index];
+					resetAnswer();
 				}
 			});
 	
@@ -31,6 +32,7 @@ $.ajax({
 					$('#question').html(questions[--index]);
 					$('#picture').attr('src', PictureUrl+directories[index]);
 					Global.questionId = ids[index];
+					resetAnswer();
 				}
 			});
 		});

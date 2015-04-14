@@ -121,7 +121,7 @@ class ShowPictureController extends FOSRestController {
 	 *  @ApiDoc(
 	 *		section="wyświetlanie obrazka"
 	 *  )
-	 *  
+	 *
 	 *  @Secure(roles="ROLE_STUDENT")
 	 */
 	public function getRandomQuestionsToDisplayAction(Request $request, $howMany) {
@@ -138,12 +138,14 @@ class ShowPictureController extends FOSRestController {
 		for ($i=0; $i<$howMany; $i++) {
 			$q[$i] = $questions[$i]->getQuestion();
 			$d[$i] = $questions[$i]->getPicture();
+			$id[$i] = $questions[$i]->getId();
 		}
 		
 		return new JsonResponse(array(
 			'FindNotNull' => true,
 			'Questions' => $q,
-			'PictureDir' => $d
+			'PictureDir' => $d,
+			'IDs' => $id
 		));
 	}
 }
