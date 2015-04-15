@@ -31,7 +31,7 @@ class ChooseCategoryController extends FOSRestController {
 
 		$categories = $em->getRepository('ZPIBundle:Category')->findAllCategories();
 		
-		if (is_null($categories) && empty($categories)) {
+		if (is_null($categories) || empty($categories)) {
 			return new JsonResponse(array(
 				'FindNotNull' => false
 			));

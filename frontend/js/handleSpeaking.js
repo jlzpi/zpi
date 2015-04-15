@@ -1,3 +1,22 @@
+Global.answered = [];
+
+function resetAnswer() {
+	if(typeof Global.answered[Global.questionId] !== 'undefined') {
+		if(typeof Global.isTest !== 'undefined' && Global.isTest) {
+			$('#send').hide();
+		}
+		else $('#send').show();
+		$('#textarea').val(Global.answered[Global.questionId].textarea);
+		$('#answer').html(Global.answered[Global.questionId].answer);
+		$('#answerImg').attr('src', Global.answered[Global.questionId].answerImg);
+	}
+	else {
+		$('#textarea').val('');
+		$('#answer').html('');
+		$('#answerImg').attr('src', '');
+		$('#send').show();
+	}
+}
 
 $(document).ready(function() {
 
@@ -61,6 +80,12 @@ $(document).ready(function() {
 				$('#answer').html(data.answer);
 				$('#answerImg').attr('src', PictureUrl + 'icons/wrongAnswer.png');
 			}
+			Global.answered[Global.questionId] = {
+				textarea: $('#textarea').val(),
+				answer: $('#answer').html(),
+				answerImg: $('#answerImg').attr('src')
+			};
+			resetAnswer();
 		}).fail(function(a,b,c) {
 			var message = a.responseJSON.error.exception[0].message;
 			alert('Blad: '+message);
