@@ -110,7 +110,7 @@ class ShowPictureController extends FOSRestController {
 			'FindNotNull' => true,
 			'Questions' => $q,
 			'PictureDir' => $d,
-			'IDs' => $id
+			'IDs' => $id,
 		));
 	}
 	

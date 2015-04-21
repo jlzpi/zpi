@@ -16,6 +16,7 @@ $.ajax({
 			$('#picture').attr('src', PictureUrl+directories[index]);
 			$('#picture').css('display', 'block');
 			$('#buttons').css('display', 'block');
+			
 			Global.questionId = ids[index];
 		
 			$('#next').click(function() {
