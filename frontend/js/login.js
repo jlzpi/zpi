@@ -15,7 +15,8 @@ $(document).ready(function() {
 				},
 				dataType: 'json'
 			}).done(function(data) {
-				if($.inArray('ROLE_STUDENT', data.user.roles)!=-1) $(location).attr('href', 'chooseCategory.html');
+				//narazie niech będzie tak, potem trzeba będzie dodać jakąś stronę startową
+				if($.inArray('ROLE_STUDENT', data.user.roles)!=-1) $(location).attr('href', 'showPicture.html?category=1');
 				//else if(User.isTeacher()) $(location).attr('href', '../index.html'); <- to sie jeszcze zmieni jak dojdzie crud dla nauczyciela
 				else location.reload(); // <- puki co jest to
 			}).fail(function(a,b,c) {

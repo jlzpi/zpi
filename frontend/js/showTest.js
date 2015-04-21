@@ -14,6 +14,10 @@ $.ajax({
 	var indexMax = getGET('howMany') - 1;
 	
 	$(document).ready(function() {
+		
+		var x = document.getElementById('test');
+		x.setAttribute("class", 'choosenCat');
+		
 		var q = question.Questions;
 		var d = question.PictureDir;
 		var ids = json.IDs;
@@ -23,18 +27,7 @@ $.ajax({
 		$('#buttons').css('display', 'block');
 		Global.questionId = ids[index];
 		Global.isTest = true;
-		
-		$('#previous').click(function() {
-			if (index > 0){	
-				index--;
-			}			
-			$('#question').html(q[index]);
-			$('#picture').attr('src', PictureUrl+d[index]);
-			$('#picture').css('display', 'block');
-			Global.questionId = ids[index];
-			resetAnswer();
-		});
-		
+				
 		$('#next').click(function() {
 			if (index < indexMax){
 				index++;

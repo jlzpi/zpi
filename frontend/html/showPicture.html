@@ -3,29 +3,69 @@
 <html>
 	<head>
 		<meta charset = "utf-8">
-		<title>Nawigowanie po obrazkach</title>
-		<link rel = "stylesheet" type = "text/css" href = "../css/showPicture.css">
-		<link rel = "stylesheet" type = "text/css" href = "../css/handleSpeaking.css">
+		<title>Kurs angielskiego - lekcja</title>
+		<link rel = "stylesheet" type = "text/css" href = "../css/style.css">
+		
 		<script type = "text/javascript" src = "../js/jquery-2.1.3.js"></script>
 		<script type = "text/javascript" src = "../js/config.js"></script>
+		<script type = "text/javascript" src = "../js/showCategories.js"></script>
 		<script type = "text/javascript" src = "../js/showPicture.js"></script>
-		<script type = "text/javascript" src = "../js/handleSpeaking.js"></script>
+		<script type = "text/javascript" src = "../js/handleSpeaking.js"></script>	
 	</head>
 
-	<body>
-		<div id = "category"></div>
-		<div id = "question"></div>
-		<img id = "picture">
-		<div id = "speechBox">
-			<textarea id="textarea" rows=3 cols=80></textarea>
-			<button id="toggleMic">Start speaking</button>
-			<button id="send">Check your answer</button>
-			<img id="answerImg">
-			<div id="answer"></div>
+	<body> 
+		<div id="wrapper">
+			<div id="menu">
+				<ul>
+					<li class="first">
+						<a href="#">Home</a>
+					</li>
+					<li>
+						<a href="#">Profil</a>
+					</li>
+					<li>
+						<a href="#">Jakieś coś</a>
+					</li>
+				</ul>
+			</div>
+			<div id="header" class="ribboncontainer">
+				<div class="ribbon"><h1>Interaktywna nauka angielskiego</h1></div>
+			</div>
+			<div id="container">
+				<div id="page">
+					<div id="content">
+						<div id = "question"></div>
+						<img id = "picture">
+						<div id = "buttons">
+							<button class="buttons" id = "previous" class = "button">Previous</button>
+							<button class="buttons" id = "next" class = "button">Next</button>	
+						</div>
+						<div id = "speechBox">
+							<textarea id="textarea"></textarea>
+							<div id="buttons2">
+								<button class="buttons" id="toggleMic">Start speaking</button>
+								<button class="buttons" id="send">Check your answer</button>
+							</div>
+							<img id="answerImg">
+							<div id="answer"></div>
+						</div>
+					
+					</div>
+				</div>
+				<div id="sidebar">
+					<h2>Kategorie:</h2>
+					<div id = "categories">
+						<ul id = "categoriesList"></ul>
+					</div>
+					<div id="test">
+						<a href= "showTest.html?howMany=4">test</a>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
 		</div>
-		<div id = "buttons">
-			<button id = "next" class = "button">Next</button>
-			<button id = "previous" class = "button">Previous</button>
+		<div id="footer">
+			<p>Copyright (c) ZPI TEAM. All rights reserved.</p>
 		</div>
 	</body>
 

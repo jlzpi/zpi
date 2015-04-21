@@ -11,15 +11,20 @@
 		}
 	
 	$(document).ready(function() {
-		var x = document.getElementById('list');
-		for (i in tablica) { 
-			var option = document.createElement("option");
-			option.text = tablica[i];
-			option.name = i;
-			x.add(option);
+		var x = document.getElementById('categoriesList');
+		for (i in tablica) { 		
+			var str = tablica[i];
+			var src = 'showPicture.html?category=' + i;
+			var result = str.link(src);	
+			var div = document.createElement('li');
+			
+			if (i == getGET('category')){
+				div.setAttribute("class", 'choosenCat');
+			}
+			
+			div.innerHTML = result;
+			x.appendChild(div);
 		}
-		$('#list').css('display', 'inline');
-		$('#choose').css('display', 'inline');
 	});
 	
 }).fail(function(a,b, message) {

@@ -1,0 +1,274 @@
+body {
+	background-color: #F8F8F8;
+	margin: 0;
+	font-size: 12px;
+    font-weight: 300;
+	font-family: Verdana, Geneva, sans-serif;
+	line-height: 1.54em;
+	color: #333;;
+}
+
+/* OPAKOWANIE */
+
+#wrapper {
+	background-color:white;
+	width: 910px;
+	margin: 0 auto;
+	border: 1px solid #d8dee5;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+
+/* NAGŁÓWEK */
+
+.ribboncontainer {
+    font-size: 13px;
+    line-height: 1.54em;
+    max-width: 910px;
+    margin: 0 auto;
+    position: relative;
+    padding: 55px 12px 15px;
+}
+
+.ribboncontainer .ribbon {
+    position: absolute;
+    top: -15px;
+    left: -20px;
+    right: -20px;
+}
+
+.ribboncontainer .ribbon::before {
+    content: ' ';
+    position: absolute;
+    left: 50;
+    top: 53px;
+    background-color: #12487C;
+    width: 19px;
+    height: 19px;
+    transform: skewY(45deg);
+    z-index: 1;
+}
+
+.ribboncontainer .ribbon::after {
+    content: ' ';
+    position: absolute;
+    right: 0;
+    top: 53px;
+    background-color: #12487C;
+    width: 19px;
+    height: 19px;
+    transform: skewY(-45deg);
+    z-index: 1;
+}
+
+.ribboncontainer .ribbon h1 {
+    background-color: #1969ba;
+    color: #ffffff;
+    padding: 15px 15px;
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
+}
+
+/* MENU */
+
+#menu {
+	height: 35px;
+	margin-top: 40px;
+	
+}
+
+#menu ul {
+	margin: 20px;
+	padding: 0;
+	list-style: none;
+	line-height: normal;
+	
+}
+
+#menu li {
+	float: left;
+	margin: 0 5px 0 0;
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
+}
+
+#menu a {
+	display: block;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+	color: #FFF;
+	border: none;
+	width: 80px;
+	text-align: center;
+	background-color: #12487C;
+}
+
+#menu a:hover {
+	margin-top: -10px;
+	height: 45px;
+}
+
+/* STRONA */
+
+#page {
+	width: 710px;
+	float: right;
+	margin: 0 auto;
+	margin-bottom: 40px;
+}
+
+/* KONTENER NA PANEL BOOCZNY I PAGE */
+
+#container {
+	margin-left: -20px;
+    overflow: hidden;
+    position: relative;
+    width: 930px;
+}
+
+/* ZAWARTOŚĆ STRONY */
+
+#content {	
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* WYŚWIETLANY OBRAZEK */
+
+#picture {
+	height: auto;
+	width: 600px;
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
+}
+
+#question {
+	padding: 40px 0px 20px 0px;
+	font-size: 1.5em;
+}
+
+/* PRZYCISKI */
+
+#buttons {
+	margin: 20px 0 0 0;
+}
+
+#previous {
+	float: left;
+	width: 90px;
+}
+
+#next {
+	float: right;
+	width: 90px;
+}
+
+.buttons {
+	background-color: #12487C;
+	color: #FFF;
+	border: 1px solid black;
+	height: 30px;
+}
+
+.buttons:hover {
+	background-color: #2A5A89;
+}
+
+.buttons:active {
+    position: relative;
+    top: 1px;
+}
+
+/* SPEECH BOX */
+
+#speechBox {
+	width: 600px;
+	text-align: center;
+}
+
+#textarea {
+	margin: 30px 0 20px 0;
+	width: 590px;
+	height: 15px;
+}
+
+#toggleMic {
+ 	background-image: url("../../files/icons/mikro.png");
+ 	background-repeat: no-repeat;
+ 	background-size: contain;
+ 	padding-left: 30px;
+}
+
+#micIcon {
+	src: url("mikro.png");
+	height: 200px;
+	width: 200px;
+}
+
+#answerImg {
+	margin: 0 auto;
+	padding: 10px 0 0 0;
+	height: 50px;
+	width: 50px;
+}
+
+/* PANEL BOCZNY */
+
+#sidebar {
+	width: 180px;
+	padding: 20px 0px 20px 40px;
+	float: left;
+	background-color: #1969ba;
+	margin-right: 20px;
+	margin-top: 40px;
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
+	color: #FFF;
+	margin-right: -20px;
+	height: 100%;
+	position: absolute;
+}
+
+#categories ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+}
+
+#categories a, #test a {
+	color: #FFF;
+	display: block;
+	text-decoration:none;
+	padding: 5px;
+}
+
+#categories a:hover, #test a:hover {
+	background-color: #12487C;
+}
+
+#test {
+	margin: 25px 0px 0px 0px;
+}
+
+#sidebar h2{
+	font-size: 16px;
+    font-weight: 300;
+}
+
+/* STOPKA */
+
+#footer {
+	width: 910px;
+	margin: 0 auto;
+	height: 20px;
+	padding: 0 0 20px 0;
+	text-align:center;
+}
+
+/* WYBRANA KATEGORIA */
+
+.choosenCat {
+	background-color:#12487C;
+}
