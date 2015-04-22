@@ -17,13 +17,17 @@
 			var src = 'showPicture.html?category=' + i;
 			var result = str.link(src);	
 			var div = document.createElement('li');
-			
+
 			if (i == getGET('category')){
-				div.setAttribute("class", 'choosenCat');
+				div.setAttribute('class', 'choosenCat');
 			}
-			
+
 			div.innerHTML = result;
 			x.appendChild(div);
+		}
+		if(typeof Global.isTest !== 'undefined' && Global.isTest) {
+			var x = $('#test');
+			x.attr('class', 'choosenCat');
 		}
 	});
 	

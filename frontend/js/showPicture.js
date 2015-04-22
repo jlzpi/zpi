@@ -16,9 +16,9 @@ $.ajax({
 			$('#picture').attr('src', PictureUrl+directories[index]);
 			$('#picture').css('display', 'block');
 			$('#buttons').css('display', 'block');
-			
+
 			Global.questionId = ids[index];
-		
+
 			$('#next').click(function() {
 				if (index < lessonLength - 1) {
 					$('#question').html(questions[++index]);
@@ -38,7 +38,7 @@ $.ajax({
 			});
 			
 			$('#finish').click(function() {
-				var action = 'finishLesson.html';
+				var action = 'finish.html';
 				var stats = {
 					lesson: json.CategoryName,
 					correct: 0,
@@ -53,7 +53,6 @@ $.ajax({
 					stats.notAnswered--;
 				});
 				if(confirm("Jesteś pewny, że chcesz zakończyć lekcję")) {
-					//$('<form method="GET" action="'+action+'"><input name="stats" type="hidden" value="'+stats+'"></form>').appendTo('body').submit();
 					setCookie('stats', JSON.stringify(stats), 1);
 					location.href = action;
 					console.log('test');

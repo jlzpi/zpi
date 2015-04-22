@@ -5,7 +5,7 @@ body {
     font-weight: 300;
 	font-family: Verdana, Geneva, sans-serif;
 	line-height: 1.54em;
-	color: #333;;
+	color: #333;
 }
 
 /* OPAKOWANIE */
@@ -39,7 +39,6 @@ body {
 .ribboncontainer .ribbon::before {
     content: ' ';
     position: absolute;
-    left: 50;
     top: 53px;
     background-color: #12487C;
     width: 19px;
@@ -117,6 +116,7 @@ body {
 	float: right;
 	margin: 0 auto;
 	margin-bottom: 40px;
+	min-height: 500px;
 }
 
 /* KONTENER NA PANEL BOOCZNY I PAGE */
@@ -156,16 +156,22 @@ body {
 }
 
 #previous {
-	float: left;
+	margin-left: 10px;
+	width: 90px;
+}
+
+#finish {
+	margin: 0 auto;
 	width: 90px;
 }
 
 #next {
-	float: right;
+	margin-right: 10px;
 	width: 90px;
 }
 
 .buttons {
+    position: relative;
 	background-color: #12487C;
 	color: #FFF;
 	border: 1px solid black;
@@ -174,11 +180,6 @@ body {
 
 .buttons:hover {
 	background-color: #2A5A89;
-}
-
-.buttons:active {
-    position: relative;
-    top: 1px;
 }
 
 /* SPEECH BOX */
@@ -225,7 +226,6 @@ body {
 	margin-top: 40px;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
 	color: #FFF;
-	margin-right: -20px;
 	height: 100%;
 	position: absolute;
 }
