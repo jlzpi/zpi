@@ -115,14 +115,13 @@ body {
 	width: 710px;
 	float: right;
 	margin: 0 auto;
-	margin-bottom: 40px;
-	min-height: 500px;
 }
 
 /* KONTENER NA PANEL BOOCZNY I PAGE */
 
 #container {
 	margin-left: -20px;
+	margin-bottom: 40px;
     overflow: hidden;
     position: relative;
     width: 930px;
@@ -222,10 +221,10 @@ body {
 	padding: 20px 0px 20px 40px;
 	float: left;
 	background-color: #1969ba;
-	margin-right: 20px;
 	margin-top: 40px;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
 	color: #FFF;
+	min-height: 300px;
 	height: 100%;
 	position: absolute;
 }
