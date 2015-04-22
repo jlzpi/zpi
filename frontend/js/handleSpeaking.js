@@ -1,4 +1,4 @@
-Global.answered = [];
+Global.answered = {};
 
 function resetAnswer() {
 	if(typeof Global.answered[Global.questionId] !== 'undefined') {

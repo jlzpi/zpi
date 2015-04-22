@@ -36,6 +36,29 @@ $.ajax({
 					resetAnswer();
 				}
 			});
+			
+			$('#finish').click(function() {
+				var action = 'finishLesson.html';
+				var stats = {
+					lesson: json.CategoryName,
+					correct: 0,
+					wrong: 0,
+					notAnswered: lessonLength
+				};
+				$.each(Global.answered, function(index, val) {
+					if(typeof val === 'undefined') stats.notAnswered++;
+					else if(val.answerImg == PictureUrl + 'icons/correctAnswer.png') stats.correct++;
+					else if(val.answerImg == PictureUrl + 'icons/wrongAnswer.png') stats.wrong++;
+					else stats.notAnswered++;
+					stats.notAnswered--;
+				});
+				if(confirm("Jesteś pewny, że chcesz zakończyć lekcję")) {
+					//$('<form method="GET" action="'+action+'"><input name="stats" type="hidden" value="'+stats+'"></form>').appendTo('body').submit();
+					setCookie('stats', JSON.stringify(stats), 1);
+					location.href = action;
+					console.log('test');
+				}
+			});
 		});
 	}
 	else {

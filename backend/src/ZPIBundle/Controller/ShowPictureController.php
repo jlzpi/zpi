@@ -111,6 +111,7 @@ class ShowPictureController extends FOSRestController {
 			'Questions' => $q,
 			'PictureDir' => $d,
 			'IDs' => $id,
+			'CategoryName' => $questions[0]->getCategory()->getName()
 		));
 	}
 	
