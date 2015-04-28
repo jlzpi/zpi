@@ -4,7 +4,8 @@
 	setCookie('stats','',-1);
 	stats.all = stats.correct + stats.wrong + stats.notAnswered;
 	
-	$('#lesson').html(stats.lesson);
+	if(stats.lesson==='test') $('#lesson').html('Podsumowanie testu');
+	else $('#lesson').html('Podsumowanie lekcji '+stats.lesson);
 	
 	$('#correct').html(stats.correct);
 	$('#correctP').html(Math.round(stats.correct*100/stats.all)+'%');

@@ -1,0 +1,31 @@
+#content-finish {
+	display: block;
+	margin-top: 60px;
+	text-align: center;
+}
+
+#content-finish table {
+	margin: 0 auto;
+	font-size: 18px;
+}
+
+#content-finish table th {
+	padding: 1px 15px;
+}
+
+#content-finish table td {
+	padding: 1px 15px;
+}
+
+#content-finish table tr:nth-child(2) {
+	background: #3e3;
+}
+#content-finish table tr:nth-child(3) {
+	background: #e33;
+}
+#content-finish table tr:nth-child(4) {
+	background: #77e;
+}
+#content-finish table tr:nth-child(5) {
+	background: #eee;
+}
