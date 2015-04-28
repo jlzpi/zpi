@@ -16,8 +16,9 @@ $.ajax({
 			$('#picture').attr('src', PictureUrl+directories[index]);
 			$('#picture').css('display', 'block');
 			$('#buttons').css('display', 'block');
+
 			Global.questionId = ids[index];
-		
+
 			$('#next').click(function() {
 				if (index < lessonLength - 1) {
 					$('#question').html(questions[++index]);
@@ -33,6 +34,28 @@ $.ajax({
 					$('#picture').attr('src', PictureUrl+directories[index]);
 					Global.questionId = ids[index];
 					resetAnswer();
+				}
+			});
+			
+			$('#finish').click(function() {
+				var action = 'finish.html';
+				var stats = {
+					lesson: json.CategoryName,
+					correct: 0,
+					wrong: 0,
+					notAnswered: lessonLength
+				};
+				$.each(Global.answered, function(index, val) {
+					if(typeof val === 'undefined') stats.notAnswered++;
+					else if(val.answerImg == PictureUrl + 'icons/correctAnswer.png') stats.correct++;
+					else if(val.answerImg == PictureUrl + 'icons/wrongAnswer.png') stats.wrong++;
+					else stats.notAnswered++;
+					stats.notAnswered--;
+				});
+				if(confirm("Jesteś pewny, że chcesz zakończyć lekcję")) {
+					setCookie('stats', JSON.stringify(stats), 1);
+					location.href = action;
+					console.log('test');
 				}
 			});
 		});

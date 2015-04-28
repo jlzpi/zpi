@@ -1,10 +1,7 @@
 <?php
-
 namespace ZPIBundle\Entity;
-
 use Doctrine\ORM\EntityRepository;
 use ZPIBundle\Entity\Question;
-
 class QuestionRepository extends EntityRepository
 {	
 	public function findQuestionsByCategory($c) {
