@@ -15,6 +15,7 @@ function resetAnswer() {
 		$('#answer').html('');
 		$('#answerImg').attr('src', '');
 		$('#send').show();
+		$('#answerImg').css({ opacity: 0 });
 	}
 }
 
@@ -67,7 +68,8 @@ $(document).ready(function() {
 			},
 			dataType: 'json'
 		}).done(function(data) {
-			if(data.correct == true) {
+			$('#answerImg').css({ opacity: 1 });
+			if(data.correct == true) {				
 				$('#answer').html(data.answer);
 				$('#answerImg').attr('src', PictureUrl + 'icons/correctAnswer.png');
 			}
