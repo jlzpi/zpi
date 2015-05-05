@@ -113,6 +113,7 @@ body {
 
 #page {
 	width: 710px;
+    min-height: 300px;
 	float: right;
 	margin: 0 auto;
 }
