@@ -8,10 +8,10 @@ use ZPIBundle\Entity\Category;
 use Symfont\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="ZPIBundle\Entity\QuestionAnswersRepository")
- * @ORM\Table(name="QuestionAnswers")
+ * @ORM\Entity(repositoryClass="ZPIBundle\Entity\AnswerRepository")
+ * @ORM\Table(name="Answer")
  */
-class QuestionAnswers
+class Answer
 {
     /**
      * @ORM\Column(type="integer")
@@ -35,6 +35,12 @@ class QuestionAnswers
      * @ORM\Column(type="string", length=200)
      */
 	private $keyWords;
+	
+	public function __construct($q, $a, $k) {
+		$this->question = $q;
+		$this->answer = $a;
+		$this->keyWords = $k;
+	}
 	
 	public function getId() {
 		return $this->id;

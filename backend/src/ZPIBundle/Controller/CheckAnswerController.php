@@ -14,7 +14,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use Doctrine\Common\Util\Debug as dump;
 
 use ZPIBundle\Entity\Question;
-use ZPIBundle\Entity\QuestionAnswers;
+use ZPIBundle\Entity\Answer;
 use ZPIBundle\Entity\QuestionRepository;
 
 class CheckAnswerController extends FOSRestController {
