@@ -1,10 +1,20 @@
+//const testLength = 5;
+
 Global.isTest = true;
 
 $.ajax({
 	type: 'GET',
+//	url: ApiUrl+'getRandomQuestionsToDisplay/' + testLength,
 	url: ApiUrl+'getRandomQuestionsToDisplay',
 	dataType: 'json'
 }).done(function(json) {
+//	if (json['FindNotNull']) {
+//		var question = json;
+//	}
+//	else {
+//		alert('Brak odpowiedniej liczby obrazków');
+//	}
+	
 	var questions = json.Questions;
 	var directories = json.PictureDir;
 	var ids = json.IDs;
@@ -16,8 +26,22 @@ $.ajax({
 		$('#picture').attr('src', PictureUrl+directories[index]);
 		$('#picture').css('display', 'block');
 		$('#buttons').css('display', 'block');
-		
 		Global.questionId = ids[index];
+		
+		for(i = 1; i <=testLength; i++) {
+			var $but = $('<button/>', {
+				text: i, 
+				id: i,
+				class: 'buttons',
+				click: function(event) { 
+					index = event.target.id - 1;
+					$('#question').html(questions[index]);
+					$('#picture').attr('src', PictureUrl+directories[index]);
+					Global.questionId = ids[index];
+					resetAnswer(); }
+			});
+			$('#allQuestions').append($but);
+		}
 
 		$('#next').click(function() {
 			if (index < testLength - 1) {
