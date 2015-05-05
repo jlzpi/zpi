@@ -31,19 +31,16 @@ class ChooseCategoryController extends FOSRestController {
 
 		$categories = $em->getRepository('ZPIBundle:Category')->findAllCategories();
 		
-		if (is_null($categories) || empty($categories)) {
-			return new JsonResponse(array(
-				'FindNotNull' => false
-			));
+		if (is_null($categories) || empty($categories) || !$categories[0] instanceof Category) {
+			throw $this->createNotFoundException("Nie znaleziono kategorii");
 		}
-		else {			
-			for($i=0;$i<count($categories);$i++){
-				$tab[$categories[$i]->getId()] = $categories[$i]->getName();
-			}
-			return new JsonResponse(array(
-				'FindNotNull' => true,			
-				'Categories' => $tab
-			));
+		
+		foreach($categories as $category) {
+			$tab[$category->getId()] = $category->getName();
 		}
+		
+		return new JsonResponse(array(
+			'Categories' => $tab
+		));
 	}
 }

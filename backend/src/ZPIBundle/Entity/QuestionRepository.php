@@ -68,7 +68,7 @@ class QuestionRepository extends EntityRepository
 		;
 	}
 	
-	public function findRandomQuestions() {
+	public function findRandomQuestions($limit) {
 		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
 		
 		$query = $rep
@@ -79,6 +79,7 @@ class QuestionRepository extends EntityRepository
 		
 		return $query
 			->getQuery()
+			->setMaxResults($limit)
 			->getResult()
 		;
 	}	
