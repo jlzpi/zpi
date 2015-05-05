@@ -1,4 +1,4 @@
-﻿const lessonLength = 3;
+﻿const lessonLength = 1;
 
 $.ajax({
 	type: 'GET',

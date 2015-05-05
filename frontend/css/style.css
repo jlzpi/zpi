@@ -110,6 +110,7 @@ body {
 /* STRONA */
 
 #page {
+	display: inline-block;
 	width: 710px;
     min-height: 300px;
 	float: right;
@@ -215,16 +216,21 @@ body {
 /* PANEL BOCZNY */
 
 #sidebar {
+	display: inline-block;	
 	width: 180px;
 	padding: 20px 0px 20px 40px;
 	float: left;
-	background-color: #1969ba;
 	margin-top: 40px;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
 	color: #FFF;
 	min-height: 300px;
-	height: 100%;
-	position: absolute;
+	margin-bottom: -10000px;
+	padding-bottom: 10000px;
+	background-color: #1969ba;
+}
+
+#sidebar > div {
+	margin-bottom: 20px;
 }
 
 #categories ul {
