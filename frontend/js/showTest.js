@@ -1,20 +1,10 @@
-//const testLength = 5;
-
 Global.isTest = true;
 
 $.ajax({
 	type: 'GET',
-//	url: ApiUrl+'getRandomQuestionsToDisplay/' + testLength,
 	url: ApiUrl+'getRandomQuestionsToDisplay',
 	dataType: 'json'
 }).done(function(json) {
-//	if (json['FindNotNull']) {
-//		var question = json;
-//	}
-//	else {
-//		alert('Brak odpowiedniej liczby obrazków');
-//	}
-	
 	var questions = json.Questions;
 	var directories = json.PictureDir;
 	var ids = json.IDs;
