@@ -23,23 +23,20 @@ body {
 .ribboncontainer {
     font-size: 13px;
     line-height: 1.54em;
-    max-width: 910px;
+    width: 910px;
     margin: 0 auto;
     position: relative;
-    padding: 55px 12px 15px;
+	clear: both;
 }
 
 .ribboncontainer .ribbon {
-    position: absolute;
-    top: -15px;
-    left: -20px;
-    right: -20px;
+	margin: -1px -20px;
 }
 
 .ribboncontainer .ribbon::before {
     content: ' ';
     position: absolute;
-    top: 53px;
+	margin-top: 41px;
     background-color: #12487C;
     width: 19px;
     height: 19px;
@@ -50,8 +47,8 @@ body {
 .ribboncontainer .ribbon::after {
     content: ' ';
     position: absolute;
-    right: 0;
-    top: 53px;
+	margin-top: -9px;
+	margin-left: 930px;
     background-color: #12487C;
     width: 19px;
     height: 19px;
@@ -69,6 +66,7 @@ body {
     position: relative;
     z-index: 2;
     box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
+	margin: 0;
 }
 
 /* MENU */
@@ -80,7 +78,7 @@ body {
 }
 
 #menu ul {
-	margin: 20px;
+	margin: 0 20px;
 	padding: 0;
 	list-style: none;
 	line-height: normal;
@@ -106,7 +104,7 @@ body {
 
 #menu a:hover {
 	margin-top: -10px;
-	height: 45px;
+	height: 24px;
 }
 
 /* STRONA */
