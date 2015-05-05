@@ -3,23 +3,24 @@
 	url: ApiUrl + 'getCategoriesToDisplay',
 	dataType: 'json'
 }).done(function(json) {
-	var tablica = json.Categories;
+	var categories = json.Categories;
 
 	$(document).ready(function() {
-		var x = document.getElementById('categoriesList');
-		for (i in tablica) { 		
-			var str = tablica[i];
-			var src = 'showPicture.html?category=' + i;
-			var result = str.link(src);	
+		var x = $('#categoriesList').get(0);
+		
+		$.each(categories, function(index, value) {
+			var src = 'showPicture.html?category=' + index;
+			var result = value.link(src);
 			var div = document.createElement('li');
-
-			if (i == getGET('category')){
+			
+			if (index == getGET('category')){
 				div.setAttribute('class', 'choosenCat');
 			}
 
 			div.innerHTML = result;
 			x.appendChild(div);
-		}
+		});
+		
 		if(typeof Global.isTest !== 'undefined' && Global.isTest) {
 			var x = $('#test');
 			x.attr('class', 'choosenCat');
