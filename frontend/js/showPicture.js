@@ -10,6 +10,22 @@ $.ajax({
 	var index = 0;
 	
 	$(document).ready(function() {
+		$('#userr').html(User.username);
+		
+		$('#logoutt').click(function() {
+			$.ajax({
+				method: 'GET',
+				url: ApiUrl + 'logout',
+				dataType: 'json'
+			}).done(function(data) {
+				alert('Zostales pomyslnie wylogowany');
+				$(location).attr('href', 'login.html');
+			}).fail(function(a,b,c) {
+				var message = a.responseJSON.error.exception[0].message;
+				alert('Blad podczas wylogowania: '+(typeof message === 'undefined'?c:message));
+			});
+		});
+				
 		$('#question').html(questions[index]);
 		$('#picture').attr('src', PictureUrl+directories[index]);
 		$('#picture').css('display', 'block');
