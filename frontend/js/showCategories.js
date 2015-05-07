@@ -6,19 +6,17 @@
 	var categories = json.Categories;
 
 	$(document).ready(function() {
-		var x = $('#categoriesList').get(0);
-		
 		$.each(categories, function(index, value) {
 			var src = 'showPicture.html?category=' + index;
 			var result = value.link(src);
-			var div = document.createElement('li');
+			var li = $('<li></li>');
+			li.html(result);
 			
-			if (index == getGET('category')){
-				div.setAttribute('class', 'choosenCat');
+			if (index == getGET('category')) {
+				li.attr('class', 'choosenCat');
 			}
 
-			div.innerHTML = result;
-			x.appendChild(div);
+			$('#categoriesList').append(li);
 		});
 		
 		if(typeof Global.isTest !== 'undefined' && Global.isTest) {
