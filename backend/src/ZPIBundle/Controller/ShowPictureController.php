@@ -14,74 +14,11 @@ use ZPIBundle\Entity\Question;
 use ZPIBundle\Entity\QuestionRepository;
 
 class ShowPictureController extends FOSRestController {
+	const TEST_LENGTH = 5;
 
-	/**
-	 *  Zwróć randomowy obrazek
-	 *  @Rest\Get("/getRandomQuestionToDisplay")
-	 *
-	 *  @ApiDoc(
-	 *		section="wyświetlanie obrazka"
-	 *  )
-	 *
-	 *	@Secure(roles="ROLE_STUDENT")
-	 */
-	public function getRandomQuestionToDisplayAction(Request $request) {
-		$em = $this->getDoctrine()->getManager();
-
-		$questions = $em->getRepository('ZPIBundle:Question')->findQuestions();
-		
-		if (is_null($questions) || empty($questions)) {
-			return new JsonResponse(array(
-				'FindNotNull' => false
-			));
-		}
-		else {
-			$randomInt = rand(0, count($questions)-1);
-			
-			return new JsonResponse(array(
-				'FindNotNull' => true,
-				'Question' => $questions[$randomInt]->getQuestion(),
-				'PictureDir' => $questions[$randomInt]->getPicture(),
-				'CategoryName' => $questions[$randomInt]->getCategory()->getName()
-			));
-		}
-	}
-	/**
-	 *  Zwróć obrazek z odpowiedniej kategorii
-	 *  @Rest\Get("/getQuestionFromCategoryToDisplay/{category}")
-	 *
-	 *  @ApiDoc(
-	 *		section="wyświetlanie obrazka"
-	 *  )
-	 *  
-	 *  @Secure(roles="ROLE_STUDENT")
-	 */
-	public function getQuestionFromCategoryToDisplayAction(Request $request, $category) {
-		$em = $this->getDoctrine()->getManager();
-
-		$questions = $em->getRepository('ZPIBundle:Question')->findQuestionsByCategory($category);
-		
-		if (is_null($questions) || empty($questions)) {
-			return new JsonResponse(array(
-				'FindNotNull' => false
-			));
-		}
-		else {
-			$randomInt = rand(0, count($questions)-1);
-			
-			return new JsonResponse(array(
-				'FindNotNull' => true,
-				'questionId' => $questions[$randomInt]->getId(),
-				'Question' => $questions[$randomInt]->getQuestion(),
-				'PictureDir' => $questions[$randomInt]->getPicture(),
-				'CategoryName' => $questions[$randomInt]->getCategory()->getName()
-			));
-		}
-	}
-	
 	/**
 	 *  Zwróć zadaną ilosć obrazków z odpowiedniej kategorii
-	 *  @Rest\Get("/getQuestionsFromCategoryToDisplay/{category}/{howMany}")
+	 *  @Rest\Get("/getQuestionsFromCategoryToDisplay/{category}")
 	 *
 	 *  @ApiDoc(
 	 *		section="wyświetlanie obrazka"
@@ -89,35 +26,37 @@ class ShowPictureController extends FOSRestController {
 	 *  
 	 *  @Secure(roles="ROLE_STUDENT")
 	 */
-	public function getQuestionsFromCategoryToDisplayAction(Request $request, $category, $howMany) {
+	public function getQuestionsFromCategoryToDisplayAction(Request $request, $category) {
 		$em = $this->getDoctrine()->getManager();
 
 		$questions = $em->getRepository('ZPIBundle:Question')->findRandomQuestionsByCategory($category);
 		
-		if (is_null($questions) || count($questions) < $howMany || $howMany < 1) {
-			return new JsonResponse(array(
-				'FindNotNull' => false
-			));
+		if (is_null($questions) || empty($questions) || !$questions[0] instanceof Question) {
+			throw $this->createNotFoundException("Nie znaleziono obrazków");
 		}
 		
-		for ($i=0; $i<$howMany; $i++) {
-			$q[$i] = $questions[$i]->getQuestion();
-			$d[$i] = $questions[$i]->getPicture();
-			$id[$i] = $questions[$i]->getId();
+		$q = array();
+		$d = array();
+		$id = array();
+		
+		foreach($questions as $question) {
+			$q[] = $question->getQuestion();
+			$d[] = $question->getPicture();
+			$id[] = $question->getId();
 		}
 		
 		return new JsonResponse(array(
-			'FindNotNull' => true,
 			'Questions' => $q,
 			'PictureDir' => $d,
 			'IDs' => $id,
-			'CategoryName' => $questions[0]->getCategory()->getName()
+			'CategoryName' => $questions[0]->getCategory()->getName(),
+			'Length' => count($questions)
 		));
 	}
 	
 	/**
 	 *  Zwróć zadaną ilosć randomowych obrazków
-	 *  @Rest\Get("/getRandomQuestionsToDisplay/{howMany}")
+	 *  @Rest\Get("/getRandomQuestionsToDisplay")
 	 *
 	 *  @ApiDoc(
 	 *		section="wyświetlanie obrazka"
@@ -125,28 +64,30 @@ class ShowPictureController extends FOSRestController {
 	 *
 	 *  @Secure(roles="ROLE_STUDENT")
 	 */
-	public function getRandomQuestionsToDisplayAction(Request $request, $howMany) {
+	public function getRandomQuestionsToDisplayAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
 
-		$questions = $em->getRepository('ZPIBundle:Question')->findRandomQuestions();
+		$questions = $em->getRepository('ZPIBundle:Question')->findRandomQuestions(ShowPictureController::TEST_LENGTH);
 		
-		if (is_null($questions) || count($questions) < $howMany || $howMany < 1) {
-			return new JsonResponse(array(
-				'FindNotNull' => false
-			));
+		if (is_null($questions) || count($questions) < ShowPictureController::TEST_LENGTH || !$questions[0] instanceof Question) {
+			throw $this->createNotFoundException("Zbyt mało obrazków w bazie");
 		}
+
+		$q = array();
+		$d = array();
+		$id = array();
 		
-		for ($i=0; $i<$howMany; $i++) {
-			$q[$i] = $questions[$i]->getQuestion();
-			$d[$i] = $questions[$i]->getPicture();
-			$id[$i] = $questions[$i]->getId();
+		foreach($questions as $question) {
+			$q[] = $question->getQuestion();
+			$d[] = $question->getPicture();
+			$id[] = $question->getId();
 		}
 		
 		return new JsonResponse(array(
-			'FindNotNull' => true,
 			'Questions' => $q,
 			'PictureDir' => $d,
-			'IDs' => $id
+			'IDs' => $id,
+			'Length' => count($questions)
 		));
 	}
 }

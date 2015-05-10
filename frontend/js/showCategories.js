@@ -3,36 +3,31 @@
 	url: ApiUrl + 'getCategoriesToDisplay',
 	dataType: 'json'
 }).done(function(json) {
-		if (json['FindNotNull']) {
-			var tablica = json['Categories'];
-		}
-		else {
-			alert('Nie znaleziono kategorii.');
-		}
-	
-	$(document).ready(function() {
-		var x = document.getElementById('categoriesList');
-		for (i in tablica) { 		
-			var str = tablica[i];
-			var src = 'showPicture.html?category=' + i;
-			var result = str.link(src);	
-			var div = document.createElement('li');
+	var categories = json.Categories;
 
-			if (i == getGET('category')){
-				div.setAttribute('class', 'choosenCat');
+	$(document).ready(function() {
+		$.each(categories, function(index, value) {
+			var src = 'showPicture.html?category=' + index;
+			var result = value.link(src);
+			var li = $('<li></li>');
+			li.html(result);
+			
+			if (index == getGET('category')) {
+				li.attr('class', 'choosenCat');
 			}
 
-			div.innerHTML = result;
-			x.appendChild(div);
-		}
+			$('#categoriesList').append(li);
+		});
+		
 		if(typeof Global.isTest !== 'undefined' && Global.isTest) {
 			var x = $('#test');
 			x.attr('class', 'choosenCat');
 		}
 	});
-	
-}).fail(function(a,b, message) {
-		if(message == 'Forbidden') alert('Nie jestes zalogowany jako uczen');
-		else alert('Nieznany blad');
+}).fail(function(a, b, c) {
+	if (typeof a.responseJSON !== 'undefined') {
+		var message = a.responseJSON.error.exception[0].message;
+		alert('Błąd odczytu kategorii: '+(typeof message === 'undefined'?c:message));
+	}
 });
 	

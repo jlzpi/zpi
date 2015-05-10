@@ -18,6 +18,28 @@ body {
 	box-shadow: 0 1px 5px rgba(0,0,0,0.2);
 }
 
+/* LOGOWANIE */
+
+.white {
+	color: #FFF;
+}
+
+#logoutContainer {
+	width: 300px;
+	height: 60px;
+	background-color: #12487C;
+	margin: 20px -20px 0px auto;
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
+	color: #FFF;
+	text-align: center;
+	display: table;
+}
+
+#blockOuter {
+	display: table-cell;
+	vertical-align: middle;
+}
+
 /* NAGŁÓWEK */
 
 .ribboncontainer {
@@ -152,20 +174,20 @@ body {
 
 #buttons {
 	margin: 20px 0 0 0;
+	text-align:center; 
 }
 
 #previous {
-	margin-left: 10px;
+	float:left;
 	width: 90px;
 }
 
 #finish {
-	margin: 0 auto;
 	width: 90px;
 }
 
 #next {
-	margin-right: 10px;
+	float: right;
 	width: 90px;
 }
 
@@ -173,12 +195,19 @@ body {
     position: relative;
 	background-color: #12487C;
 	color: #FFF;
-	border: 1px solid black;
+	border: none;
 	height: 30px;
+	min-width: 30px;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.55);
 }
 
 .buttons:hover {
 	background-color: #2A5A89;
+}
+
+.buttons:active {
+	background-color: #2A5A89;
+	box-shadow:inset 2px 2px 5px rgba(0,0,0,0.5);;
 }
 
 /* SPEECH BOX */
@@ -211,6 +240,7 @@ body {
 	padding: 10px 0 0 0;
 	height: 50px;
 	width: 50px;
+	opacity: 0;
 }
 
 /* PANEL BOCZNY */
@@ -274,4 +304,14 @@ body {
 
 .choosenCat {
 	background-color:#12487C;
+}
+
+/* FRASTEST */
+
+#allQuestions button{
+	margin-left: 3px; 
+}
+
+#allQuestions {
+	padding: 40px 0px 0px 0px; 
 }
