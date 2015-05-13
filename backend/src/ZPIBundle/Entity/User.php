@@ -5,6 +5,7 @@ namespace ZPIBundle\Entity;
 use FOS\UserBundle\Entity\User as CoreUser;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
+use ZPIBundle\Entity\Statistics;
 
 /**
  * @ORM\Entity
@@ -28,8 +29,14 @@ class User extends CoreUser {
 	 * @Groups({"username_and_roles"})
 	 */
 	protected $roles;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="Statistics", mappedBy="user")
+	 */
+	protected $statistics;
 
     public function __construct() {
         parent::__construct();
+		$this->statistics = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
