@@ -13,3 +13,7 @@ chooseCategory_controller:
 checkAnswer_controller:
     type: rest
     resource: ZPIBundle\Controller\CheckAnswerController
+
+statistics_controller:
+    type: rest
+    resource: ZPIBundle\Controller\StatisticsController

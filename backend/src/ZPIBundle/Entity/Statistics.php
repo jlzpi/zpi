@@ -9,7 +9,7 @@ use ZPIBundle\Entity\User;
 use Symfont\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ZPIBundle\Entity\StatisticsRepository")
  * @ORM\Table(name="Statistics")
  */
 class Statistics
@@ -38,6 +38,12 @@ class Statistics
      */
     private $incorrect;
 
+    public function __construct($question, $user) {
+		$this->question = $question;
+		$this->user = $user;
+		$this->correct = 0;
+		$this->incorrect = 0;
+    }
 	
 	public function getUser() {
 		return $this->user;

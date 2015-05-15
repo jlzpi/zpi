@@ -39,4 +39,8 @@ class User extends CoreUser {
         parent::__construct();
 		$this->statistics = new \Doctrine\Common\Collections\ArrayCollection();
     }
+	
+	public function getId() {
+		return $this->id;
+	}
 }

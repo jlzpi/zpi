@@ -9,7 +9,12 @@
 
 	$(document).ready(function() {
 		$.each(categories, function(index, value) {
-			var src = file + '?category=' + index;
+			if(file == 'finish.html') {
+				var src = 'showPicture.html?category=' + index;
+			}
+			else {
+				var src = file + '?category=' + index;
+			}
 			var result = value.link(src);
 			var li = $('<li></li>');
 			li.html(result);
