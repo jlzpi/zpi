@@ -11,8 +11,10 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use FOS\RestBundle\Controller\Annotations\View;
 
 use ZPIBundle\Entity\Question;
+use ZPIBundle\Entity\Answer;
 use ZPIBundle\Entity\QuestionRepository;
 use ZPIBundle\Entity\Category;
 
@@ -166,7 +168,7 @@ class TeacherPanelController extends FOSRestController {
 	}
 	
 	/**
-	 *  Wyswietl kategorie
+	 *  Dodaj kategorie
 	 *  @Rest\Get("/addCategory/{name}")
 	 *
 	 *  @ApiDoc(
@@ -186,6 +188,237 @@ class TeacherPanelController extends FOSRestController {
 		return array(
 			'message' => 'added category',
 			'categoryName' => $category->getName()
+		);
+	}
+	
+	/**
+	 *  Zmien nazwe kategori
+	 *  @Rest\Get("/changeCategory/{id}/{name}",
+	 *		requirements={
+	 *			"id"="\d+"
+	 *		}
+	 *	)
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela"
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function changeCategoryAction(Request $request, $id, $name) {
+		$em = $this->getDoctrine()->getManager();
+
+		$category = $em->getRepository('ZPIBundle:Category')->find($id);
+		
+		if (is_null($category) || !$category instanceof Category) {
+			throw $this->createNotFoundException('Category not found');
+		}
+		
+		$category->setName($name);
+		
+		$em->persist($category);
+		$em->flush();
+		
+		return array(
+			'message' => 'category name changed',
+			'categoryName' => $category->getName()
+		);
+	}
+	
+	/**
+	 *  Wyswietl pytania
+	 *  @Rest\Get("/getQuestions/{category}",
+	 *		requirements={
+	 *			"category"="\d+"
+	 *		}
+	 *	)
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela"
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 *	
+	 *	@View(serializerGroups={"question"})
+	 */
+	public function getQuestionsAction(Request $request, $category) {
+		$em = $this->getDoctrine()->getManager();
+
+		$questions = $em->getRepository('ZPIBundle:Question')->findQuestionsByCategory($category);
+		
+		if (is_null($questions) || empty($questions) || !$questions[0] instanceof Question) {
+			throw $this->createNotFoundException('Questions not found');
+		}
+		
+		return array(
+			'questions' => $questions
+		);
+	}
+	
+	/**
+	 *  Usun pytanie
+	 *  @Rest\Get("/deleteQuestion/{id}")
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela"
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function deleteQuestionAction(Request $request, $id) {
+		$em = $this->getDoctrine()->getManager();
+
+		$question = $em->getRepository('ZPIBundle:Question')->find($id);
+		
+		if (is_null($question) || !$question instanceof Question) {
+			throw $this->createNotFoundException('Question not found');
+		}
+		
+		$em->remove($question);
+		$em->flush();
+		
+		return array(
+			'message' => 'question deleted'
+		);
+	}
+	
+	/**
+	 *  Dodaj pytanie
+	 *  @Rest\Post("/addQuestion/{category}",
+	 *		requirements={
+	 *			"category"="\d+"
+	 *		}
+	 *	)
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela",
+     *  	parameters={
+     *  	    {"name"="picture", "dataType"="string", "required"=true, "description"="obrazek"},
+     *  	    {"name"="question", "dataType"="string", "required"=true, "description"="pytanie"}
+     * 	 	}
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function addQuestionAction(Request $request, $category) {
+		$em = $this->getDoctrine()->getManager();
+		$_picture = $request->request->get('picture');
+		$_question = $request->request->get('question');
+
+		$question = new Question($_picture, $_question, $em->getRepository('ZPIBundle:Category')->find($category));
+		
+		$em->persist($question);
+		$em->flush();
+		
+		return array(
+			'message' => 'question added',
+			'questionId' => $question->getId()
+		);
+	}
+	
+	/**
+	 *  Zmien pytanie
+	 *  @Rest\Get("/changeQuestion/{id}")
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela",
+     *  	parameters={
+     *  	    {"name"="picture", "dataType"="string", "required"=true, "description"="obrazek"},
+     *  	    {"name"="question", "dataType"="string", "required"=true, "description"="pytanie"}
+     * 	 	}
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function changeQuestionAction(Request $request, $id) {
+		$em = $this->getDoctrine()->getManager();
+		$_picture = $request->request->get('picture');
+		$_question = $request->request->get('question');
+
+		$question = $em->getRepository('ZPIBundle:Question')->find($id);
+		
+		if (is_null($question) || !$question instanceof Question) {
+			throw $this->createNotFoundException('Question not found');
+		}
+		
+		$question->setPicture($_picture);
+		$question->setQuestion($_question);
+		
+		$em->persist($question);
+		$em->flush();
+		
+		return array(
+			'message' => 'question modified',
+			'questionId' => $question->getId()
+		);
+	}
+	
+	/**
+	 *  Wyswietl pytanie z odpowiedziami
+	 *  @Rest\Get("/getQuestionWithAnswers/{questionId}")
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela")
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 *
+	 *	@View(serializerGroups={"question_with_answers"})
+	 */
+	public function getQuestionWithAnswersAction(Request $request, $questionId) {
+		$em = $this->getDoctrine()->getManager();
+		$answers = $request->request->get('answers');
+		$keyWords = $request->request->get('keyWords');
+
+		$question = $em->getRepository('ZPIBundle:Question')->find($questionId);
+		
+		if (is_null($question) || !$question instanceof Question) {
+			throw $this->createNotFoundException('Question not found');
+		}
+		
+		return array(
+			'question' => $question
+		);
+	}
+	
+	/**
+	 *  Modyfikuj odpowiedzi do pytania
+	 *  @Rest\Post("/modifyAnswers/{questionId}")
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela",
+     *  	parameters={
+     *  	    {"name"="answers", "dataType"="array", "required"=true, "description"="obrazek"}
+     * 	 	}
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function modifyAnswersAction(Request $request, $questionId) {
+		$em = $this->getDoctrine()->getManager();
+		$answers = $request->request->get('answers');
+
+		$question = $em->getRepository('ZPIBundle:Question')->find($questionId);
+		
+		if (is_null($question) || !$question instanceof Question) {
+			throw $this->createNotFoundException('Question not found');
+		}
+		
+		foreach($question->getAnswers() as $answer) {
+			$em->remove($answer);
+		}
+		
+		$question->resetAnswers();
+		foreach($answers as $_answer) {
+			$answer = new Answer($question, $_answer['answer'], $_answer['keyWords']);
+			$question->addAnswer($answer);
+		}
+		
+		$em->persist($question);
+		$em->flush();
+		
+		return array(
+			'message' => 'question answers modified',
+			'questionId' => $question->getId()
 		);
 	}
 }
