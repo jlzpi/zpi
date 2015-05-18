@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use ZPIBundle\Entity\Question;
 use ZPIBundle\Entity\QuestionRepository;
+use ZPIBundle\Entity\Category;
 
 class TeacherPanelController extends FOSRestController {
 	const PICTURE_URL = '../../files/pictures/';
@@ -102,6 +103,89 @@ class TeacherPanelController extends FOSRestController {
 		return array(
 			'message' => 'picture added',
 			'pictureName' => $name
+		);
+	}
+	
+	/**
+	 *  Wyswietl kategorie
+	 *  @Rest\Get("/getCategories")
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela"
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function getCategoriesAction(Request $request) {
+		$em = $this->getDoctrine()->getManager();
+
+		$categories = $em->getRepository('ZPIBundle:Category')->findAllCategories();
+		
+		if (is_null($categories) || empty($categories) || !$categories[0] instanceof Category) {
+			throw $this->createNotFoundException('Categories not found');
+		}
+		
+		foreach($categories as $category) {
+			$tab[$category->getId()] = $category->getName();
+		}
+		
+		return array(
+			'categories' => $tab
+		);
+	}
+	
+	/**
+	 *  Usun kategorie
+	 *  @Rest\Get("/deleteCategory/{id}",
+	 *		requirements={
+	 *			"id"="\d+"
+	 *		}
+	 *	)
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela"
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function deleteCategoryAction(Request $request, $id) {
+		$em = $this->getDoctrine()->getManager();
+
+		$category = $em->getRepository('ZPIBundle:Category')->find($id);
+		
+		if (is_null($category) || !$category instanceof Category) {
+			throw $this->createNotFoundException('Category not found');
+		}
+		
+		$em->remove($category);
+		$em->flush();
+		
+		return array(
+			'message' => 'category deleted'
+		);
+	}
+	
+	/**
+	 *  Wyswietl kategorie
+	 *  @Rest\Get("/addCategory/{name}")
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela"
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function addCategoryAction(Request $request, $name) {
+		$em = $this->getDoctrine()->getManager();
+		
+		$category = new Category($name);
+		
+		$em->persist($category);
+		$em->flush();
+		
+		return array(
+			'message' => 'added category',
+			'categoryName' => $category->getName()
 		);
 	}
 }
