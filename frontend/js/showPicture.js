@@ -1,3 +1,38 @@
+Global.buttonIndex = 0;
+
+function chosenPicture(lessonLength, index){
+	for(i = 0; i <lessonLength; i++) {
+		if (i === index){
+			var id = "#" + i;
+			$(id).css("border", "2px solid #990000");
+		}
+		else {
+			var id = "#" + i;
+			$(id).css("border", "none");
+		}
+	}	
+}
+
+function navigationButtons(index, howManyButtons, lessonLength){
+	if(howManyButtons != lessonLength) {
+		var first = 1 + index - howManyButtons + parseInt(howManyButtons/2);	
+		var maxPos = lessonLength - Math.round(howManyButtons/2);
+
+		if(first >= 0 && index>=maxPos){
+			first = lessonLength - howManyButtons;	
+		}
+		else if(first < 0 && index<maxPos){
+			first = 0;
+		}
+		$('#allQuestions').children('button').each(function() {
+			$(this).attr('id', first);
+			first++;
+			$(this).text(first);
+		});	
+		setAnswerdButton();
+	}	
+}
+
 $.ajax({
 	type: 'GET',
 	url: ApiUrl+'getQuestionsFromCategoryToDisplay/' + getGET('category'),
@@ -8,22 +43,50 @@ $.ajax({
 	var ids = json.IDs;
 	var lessonLength = json.Length;
 	var index = 0;
+	var howManyButtons = 6; //ile buttonów ma wyświetlać
 	
-	$(document).ready(function() {
-				
+	if (lessonLength < howManyButtons){
+		howManyButtons = lessonLength;
+	}
+	
+	$(document).ready(function() {				
 		$('#question').html(questions[index]);
 		$('#picture').attr('src', PictureUrl+directories[index]);
 		$('#picture').css('display', 'block');
 		$('#buttons').css('display', 'block');
 
 		Global.questionId = ids[index];
+		
+		for(i = 0; i<howManyButtons; i++) {
+			var $but = $('<button/>', {
+				text: i+1, 
+				id: i,
+				class: 'buttons',
+				click: function(event) { 
+					index = parseInt(event.target.id);
+					$('#question').html(questions[index]);
+					$('#picture').attr('src', PictureUrl+directories[index]);
+					Global.questionId = ids[index];					
+					navigationButtons(index, howManyButtons, lessonLength);
+					Global.buttonIndex = index;
+					resetAnswer(); 
+					chosenPicture(lessonLength, index); 					
+					}
+			});
+			$('#allQuestions').append($but);
+		}
+		
+		chosenPicture(lessonLength, index);
 
 		$('#next').click(function() {
 			if (index < lessonLength - 1) {
 				$('#question').html(questions[++index]);
 				$('#picture').attr('src', PictureUrl+directories[index]);
 				Global.questionId = ids[index];
+				navigationButtons(index, howManyButtons, lessonLength);
+				Global.buttonIndex = index;
 				resetAnswer();
+				chosenPicture(lessonLength, index);
 			}
 		});
 	
@@ -32,7 +95,10 @@ $.ajax({
 				$('#question').html(questions[--index]);
 				$('#picture').attr('src', PictureUrl+directories[index]);
 				Global.questionId = ids[index];
+				navigationButtons(index, howManyButtons, lessonLength);
+				Global.buttonIndex = index;
 				resetAnswer();
+				chosenPicture(lessonLength, index);
 			}
 		});
 			

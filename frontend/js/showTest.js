@@ -1,4 +1,18 @@
 Global.isTest = true;
+Global.buttonIndex = 0;
+
+function chosenPicture(testLength, index){
+	for(i = 0; i <testLength; i++) {
+		if (i === index){
+			var id = "#" + i;
+			$(id).css("border", "2px solid #990000");
+		}
+		else {
+			var id = "#" + i;
+			$(id).css("border", "none");
+		}
+	}	
+}
 
 $.ajax({
 	type: 'GET',
@@ -18,28 +32,34 @@ $.ajax({
 		$('#picture').css('display', 'block');
 		$('#buttons').css('display', 'block');
 		Global.questionId = ids[index];
-		
-		for(i = 1; i <=testLength; i++) {
+				
+		for(i = 0; i<testLength; i++) {
 			var $but = $('<button/>', {
-				text: i, 
+				text: i+1, 
 				id: i,
 				class: 'buttons',
 				click: function(event) { 
-					index = event.target.id - 1;
+					index = parseInt(event.target.id);
 					$('#question').html(questions[index]);
 					$('#picture').attr('src', PictureUrl+directories[index]);
 					Global.questionId = ids[index];
-					resetAnswer(); }
+					Global.buttonIndex = index;
+					resetAnswer(); 
+					chosenPicture(testLength, index); }
 			});
 			$('#allQuestions').append($but);
 		}
+		
+		chosenPicture(testLength, index);
 
 		$('#next').click(function() {
 			if (index < testLength - 1) {
 				$('#question').html(questions[++index]);
 				$('#picture').attr('src', PictureUrl+directories[index]);
 				Global.questionId = ids[index];
+				Global.buttonIndex = index;
 				resetAnswer();
+				chosenPicture(testLength, index);
 			}
 		});
 		
@@ -48,7 +68,9 @@ $.ajax({
 				$('#question').html(questions[--index]);
 				$('#picture').attr('src', PictureUrl+directories[index]);
 				Global.questionId = ids[index];
+				Global.buttonIndex = index;
 				resetAnswer();
+				chosenPicture(testLength, index);
 			}
 		});
 		

@@ -1,22 +1,37 @@
 Global.answered = {};
+Global.answerdButtons = [];
 
 function resetAnswer() {
 	if(typeof Global.answered[Global.questionId] !== 'undefined') {
 		if(typeof Global.isTest !== 'undefined' && Global.isTest) {
-			$('#send').hide();
+			$('#send').hide();			
 		}
 		else $('#send').show();
 		$('#textarea').val(Global.answered[Global.questionId].textarea);
 		$('#answer').html(Global.answered[Global.questionId].answer);
 		$('#answerImg').attr('src', Global.answered[Global.questionId].answerImg);
+		$('#answerImg').css('opacity', 1);		
 	}
 	else {
 		$('#textarea').val('');
 		$('#answer').html('');
 		$('#answerImg').attr('src', '');
 		$('#send').show();
-		$('#answerImg').css({ opacity: 0 });
+		$('#answerImg').css('opacity', 0);	
 	}
+}
+
+function setAnswerdButton(){
+	$('#allQuestions').children('button').each(function() {	
+		var id = "#" + $(this).attr('id');
+		$(id).css("background-color", "#12487C");
+		for (i=0; i<Global.answerdButtons.length; i++) {			
+			if (parseInt($(this).attr('id')) === Global.answerdButtons[i]){
+				var id = "#" + $(this).attr('id');
+				$(id).css("background-color", "#006633");
+			}
+		}
+	});	
 }
 
 $(document).ready(function() {
@@ -79,7 +94,7 @@ console.log("res" + event.resultIndex +" - "+event.results.length);
 			},
 			dataType: 'json'
 		}).done(function(data) {
-			$('#answerImg').css({ opacity: 1 });
+			$('#answerImg').css('opacity', 1);
 			if(data.correct == true) {				
 				$('#answer').html(data.answer);
 				$('#answerImg').attr('src', PictureUrl + 'icons/correctAnswer.png');
@@ -94,6 +109,8 @@ console.log("res" + event.resultIndex +" - "+event.results.length);
 				answerImg: $('#answerImg').attr('src')
 			};
 			resetAnswer();
+			Global.answerdButtons.push(Global.buttonIndex);
+			setAnswerdButton();
 		}).fail(function(a,b,c) {
 			var message = a.responseJSON.error.exception[0].message;
 			alert('Blad: '+message);

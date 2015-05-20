@@ -14,7 +14,7 @@ use ZPIBundle\Entity\Question;
 use ZPIBundle\Entity\QuestionRepository;
 
 class ShowPictureController extends FOSRestController {
-	const TEST_LENGTH = 5;
+	const TEST_LENGTH = 10;
 
 	/**
 	 *  Zwróć zadaną ilosć obrazków z odpowiedniej kategorii

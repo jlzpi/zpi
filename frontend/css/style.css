@@ -177,8 +177,7 @@ body {
 	text-align:center; 
 }
 
-#previous {
-	float:left;
+#previous {	
 	width: 90px;
 }
 
@@ -187,8 +186,8 @@ body {
 }
 
 #next {
-	float: right;
 	width: 90px;
+
 }
 
 .buttons {
@@ -309,9 +308,10 @@ body {
 /* FRASTEST */
 
 #allQuestions button{
-	margin-left: 3px; 
+	margin-left: 2px; 
+	margin-right: 2px;
 }
 
-#allQuestions {
-	padding: 40px 0px 0px 0px; 
+#allQuestions{
+	display: inline-block
 }
