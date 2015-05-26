@@ -43,7 +43,7 @@ $.ajax({
 	var ids = json.IDs;
 	var lessonLength = json.Length;
 	var index = 0;
-	var howManyButtons = 6; //ile buttonów ma wyświetlać
+	var howManyButtons = 7; //ile buttonów ma wyświetlać
 	
 	if (lessonLength < howManyButtons){
 		howManyButtons = lessonLength;
