@@ -1,0 +1,61 @@
+#newPicture {
+	width:200px;
+	height:200px;
+}
+
+.thumb {
+	width:100px;
+	padding: 20px;
+	
+}
+
+.big {
+	
+	
+	border: 5px solid red;
+}
+
+#images {
+	
+	height:350px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	padding-bottom: 5px;
+}
+
+li > a{
+
+	
+	color: white;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+form {
+	padding-left: 30px;
+}
+
+
+#page {
+	display: inline-block;
+	width: 100%;
+    min-height: 300px;
+	
+	margin: 0 auto;
+}
+
+input[type=text] {
+	width:100%;
+}
+
