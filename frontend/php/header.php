@@ -24,7 +24,7 @@
 			<div id="menu">
 				<ul>
 					<li>
-						<a href="#">Home</a>
+						<a href="teacherPane.php">Home</a>
 					</li>
 					<li>
 						<a href="addQuestion.php">Dodaj pytanie</a>

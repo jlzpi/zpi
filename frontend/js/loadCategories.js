@@ -3,13 +3,10 @@ $.ajax({
 	url: ApiUrl + 'panel/getCategories',
 	dataType: 'json'
 }).done(function(json) {
-	console.log("done");
 	var categories = json.categories;
-	console.log(categories);
 
 	$(document).ready(function() {
 		$.each(categories, function(index, value) {
-			console.log(index+" >> "+value);
 			var result = value;//.link(src);
 			
 			var opt = $('<input type="radio" class="radio" name="kategorie"/>');
@@ -38,4 +35,3 @@ $.ajax({
 		alert('Błąd odczytu kategorii: '+(typeof message === 'undefined'?c:message));
 	}
 });
-	

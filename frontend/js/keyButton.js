@@ -42,7 +42,6 @@ $(document).ready(function() {
 		
 		var answer=$.trim($("#answer").val());
 		
-		console.log($("#quest").val());//+" "+$answer);//$.trim(quest)+ " "+$.trim(answer));
 		wrong=(quest=="" || answer=="");
 		var keys="";
 		$('.key').each(function(){
@@ -69,62 +68,35 @@ $(document).ready(function() {
 		
 		var n = url.lastIndexOf('/');
 		var result = "pictures"+url.substring(n);
-		console.log(result + " ; "+category);
 	
-		//var ID="";
+		var asd = [{
+			answer: answer,
+			keyWords: keys
+		}];
+		
 		$.ajax({
 			method: 'POST',
-			url: ApiUrl + 'panel/addQuestion/'+category,
+			url: ApiUrl + 'panel/addQuestionWithAnswer/'+category,
 			data: {
 				question: quest,
-				picture: result
+				picture: result,
+				answers: asd
 			},
 			dataType: 'json'
 		}).done(function(data) {
-			//alert("Dodano.");
-			var ID=data.questionId;
-			var asd = [{
-				answer: answer,
-				keyWords: keys
-			}];
+			alert("Dodano.");
 			
-			//AJAX W AJAXIE
-				$.ajax({
-				method: 'POST',
-				url: ApiUrl + 'panel/modifyAnswers/'+ID,
-				data: {
-					answers: asd
-				},
-				dataType: 'json'
-			}).done(function(data) {
-				alert("Dodano.");
-				var numItems = $('.key').length;
-				for (var i = numItems; i > 0; i--) {
-					$("#key"+i).remove();
-					$("#delBut"+i).remove();
-				};
+			var numItems = $('.key').length;
+			for (var i = numItems; i > 0; i--) {
+				$("#key"+i).remove();
+				$("#delBut"+i).remove();
+			};
 
-				$("#key0").val("");
-
-			}).fail(function(a,b,c) {
-				alert("Nie można było dodać pytania");
-			});
-			
-			//KONIEC
-			
+			$("#key0").val("");
 			
 		}).fail(function(a,b,c) {
 			//var message = a.responseJSON.error.exception[0].message;
 			alert("Nie można było dodać pytania :(");
 		});
-			
-	
-		
-		//var asd=[];
-		
-		
-		//console.log(asd);
-		//alert("wujek");
-	
 	});
 });

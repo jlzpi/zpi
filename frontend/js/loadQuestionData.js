@@ -1,6 +1,7 @@
 var questions;
 var current=0;
-var idCat=2;
+var idCat=1;
+
 $.ajax({
 	type: 'GET',
 	url: ApiUrl + 'panel/getQuestions/'+idCat,
@@ -48,7 +49,7 @@ function loadQ() {
 		var id=question.id;
 
 
-		var url="../../files/"+question.picture;
+		var url=PictureUrl+question.picture;
 		$("#quest").val(question.question);
 		$("#pictureURL").val(question.picture);
 		$("#picture").attr("src",url);
@@ -139,7 +140,6 @@ function loadQ() {
 			var n = URL.lastIndexOf('/');
 			var resultURL = "pictures"+URL.substring(n);
 
-			//TODO: zmienić w backendzie GET na POST, bo nie łapie data'y
 			$.ajax({
 				method: 'POST',
 				url: ApiUrl + 'panel/changeQuestion/'+id,

@@ -1,11 +1,5 @@
 <?php include("header.php"); ?>
 
-		<link rel="stylesheet" type="text/css" href="../css/style.css">
-		<link rel="stylesheet" type="text/css" href="../css/loading.css">
-
-		<script type="text/javascript" src="../js/jquery-2.1.3.js"></script>
-		<script type="text/javascript" src="../js/config.js"></script>
-
 		<script src="../js/loadThumbsToChoose.js"></script>
 		<script src="../js/keyButton.js"></script>
 		<script src="../js/loadCategories.js"></script>

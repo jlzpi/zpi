@@ -1,4 +1,4 @@
-var ApiUrl = '../../backend/web/app_dev.php/api/';
+var ApiUrl = '../../backend/web/api/';
 var PictureUrl = '../../files/';
 
 var User = {
@@ -48,6 +48,8 @@ $.ajax({
 	User.username = data.user.username;
 	User.isStudent = $.inArray('ROLE_STUDENT', data.user.roles)!=-1;
 	User.isTeacher = $.inArray('ROLE_TEACHER', data.user.roles)!=-1;
+}).fail(function() {
+	if(!location.href.match(/^.*\/login.html/i)) location.href = '../html/login.html';
 }).always(function() {
 	$.holdReady(false);
 });

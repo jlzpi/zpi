@@ -2,10 +2,9 @@ $.ajax({
 	type: 'GET',
 	url: ApiUrl + 'panel/getCategories',
 	dataType: 'json'
-}).done(function(json) {
-	console.log("done");
-	var categories = json.categories;
-	console.log(categories);
+}).always(function(json) {
+	if(typeof json.categories === 'undefined') var categories = [];
+	else var categories = json.categories;
 
 	$(document).ready(function() {
 		
@@ -59,8 +58,6 @@ $.ajax({
 			$(".chb:checked").each(function(){
 				var catID=$(this).val();
 				
-
-
 				$.ajax({
 					method: 'GET',
 					url: ApiUrl + 'panel/deleteCategory/'+catID,
@@ -69,13 +66,15 @@ $.ajax({
 					},
 					dataType: 'json'
 				}).done(function(data) {
-					alert("Usunięto.");
+					alert('Usunięto.');
 					usunieto=true;
 					$("#submit").click();
 
 				}).fail(function(a,b,c) {
 					alert("Nie można było usunąć kategorii.");
 				});
+				
+				
 			});
 	});
 
@@ -184,10 +183,5 @@ $.ajax({
 		
 		$(".radio:first").attr("checked",true);		
 	});
-}).fail(function(a, b, c) {
-	if (typeof a.responseJSON !== 'undefined') {
-		var message = a.responseJSON.error.exception[0].message;
-		alert('Błąd odczytu kategorii: '+(typeof message === 'undefined'?c:message));
-	}
 });
 	

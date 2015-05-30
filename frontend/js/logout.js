@@ -10,7 +10,7 @@ $(document).ready(function() {
 				dataType: 'json'
 			}).done(function(data) {
 				alert('Zostales pomyslnie wylogowany');
-				$(location).attr('href', 'login.html');
+				$(location).attr('href', '../html/login.html');
 				clicked = 0;
 			}).fail(function(a,b,c) {
 				var message = a.responseJSON.error.exception[0].message;

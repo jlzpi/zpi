@@ -18,6 +18,24 @@ class QuestionRepository extends EntityRepository
 		;
 	}
 
+	public function getByQuestionAndCategory($q, $c) {
+		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
+		
+		$query = $rep
+			->createQueryBuilder('Question')
+			->select('Question')
+			->where('Question.category = :category')
+			->setParameter('category',$c)
+			->andWhere('Question.question = :question')
+			->setParameter('question',$q)
+		;
+		
+		return $query
+			->getQuery()
+			->getOneOrNullResult()
+		;
+	}
+	
 	public function getNumberOfQuestionsFromCategory($category) {
 		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
 		

@@ -41,11 +41,7 @@ class TeacherPanelController extends FOSRestController {
 	
 	/**
 	 *  Usun obrazek
-	 *  @Rest\Get("/deletePicture/{pictureName}", 
-	 *		requirements={
-	 *			"pictureName"="^[a-zA-Z0-9._]+"
-	 *		}
-	 *	)
+	 *  @Rest\Post("/deletePictures")
 	 *
 	 *  @ApiDoc(
 	 *		section="panel nauczyciela"
@@ -53,14 +49,16 @@ class TeacherPanelController extends FOSRestController {
 	 *
 	 *  @Secure(roles="ROLE_TEACHER")
 	 */
-	public function deletePictureAction(Request $request, $pictureName) {
+	public function deletePicturesAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
 
-		if(file_exists(TeacherPanelController::PICTURE_URL.$pictureName)) {
-			unlink(TeacherPanelController::PICTURE_URL.$pictureName);
-			$message = 'picture deleted';
+		foreach($request->request->get('pictures') as $pictureName) {
+			if(file_exists(TeacherPanelController::PICTURE_URL.$pictureName)) {
+				unlink(TeacherPanelController::PICTURE_URL.$pictureName);
+				$message = 'pictures deleted';
+			}
+			else $message = 'picture doesn\'t exist';
 		}
-		else $message = 'picture doesn\'t exist';
 		
 		return array(
 			'message' => $message
@@ -124,7 +122,7 @@ class TeacherPanelController extends FOSRestController {
 		$categories = $em->getRepository('ZPIBundle:Category')->findAllCategories();
 		
 		if (is_null($categories) || empty($categories) || !$categories[0] instanceof Category) {
-			throw $this->createNotFoundException('Categories not found');
+			return array('categories' => array());
 		}
 		
 		foreach($categories as $category) {
@@ -318,7 +316,7 @@ class TeacherPanelController extends FOSRestController {
 	
 	/**
 	 *  Zmien pytanie
-	 *  @Rest\Get("/changeQuestion/{id}")
+	 *  @Rest\Post("/changeQuestion/{id}")
 	 *
 	 *  @ApiDoc(
 	 *		section="panel nauczyciela",
@@ -387,7 +385,7 @@ class TeacherPanelController extends FOSRestController {
 	 *  @ApiDoc(
 	 *		section="panel nauczyciela",
      *  	parameters={
-     *  	    {"name"="answers", "dataType"="array", "required"=true, "description"="obrazek"}
+     *  	    {"name"="answers", "dataType"="array", "required"=true, "description"="odpowiedzi"}
      * 	 	}
 	 *  )
 	 *
@@ -418,6 +416,50 @@ class TeacherPanelController extends FOSRestController {
 		
 		return array(
 			'message' => 'question answers modified',
+			'questionId' => $question->getId()
+		);
+	}
+	
+	/**
+	 *  Dodaj pytanie z odpowiedzia
+	 *  @Rest\Post("/addQuestionWithAnswer/{category}",
+	 *		requirements={
+	 *			"category"="\d+"
+	 *		}
+	 *	)
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela",
+     *  	parameters={
+     *  	    {"name"="picture", "dataType"="string", "required"=true, "description"="obrazek"},
+     *  	    {"name"="question", "dataType"="string", "required"=true, "description"="pytanie"},
+     *  	    {"name"="answers", "dataType"="array", "required"=true, "description"="odpowiedzi"}
+     * 	 	}
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function addQuestionWithAnswerAction(Request $request, $category) {
+		$em = $this->getDoctrine()->getManager();
+		$_picture = $request->request->get('picture');
+		$_question = $request->request->get('question');
+		$answers = $request->request->get('answers');
+
+		$question = $em->getRepository('ZPIBundle:Question')->getByQuestionAndCategory($_question, $category);
+		if (is_null($question) || !$question instanceof Question) {
+			$question = new Question($_picture, $_question, $em->getRepository('ZPIBundle:Category')->find($category));
+		}
+		
+		foreach($answers as $_answer) {
+			$answer = new Answer($question, $_answer['answer'], $_answer['keyWords']);
+			$question->addAnswer($answer);
+		}
+		
+		$em->persist($question);
+		$em->flush();
+		
+		return array(
+			'message' => 'question added/modified',
 			'questionId' => $question->getId()
 		);
 	}
