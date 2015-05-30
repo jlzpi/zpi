@@ -17,6 +17,7 @@ class User extends CoreUser {
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+	 * @Groups({"username_and_roles"})
      */
     protected $id;
 	

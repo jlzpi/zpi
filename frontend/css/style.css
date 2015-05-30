@@ -174,11 +174,11 @@ body {
 
 #buttons {
 	margin: 20px 0 0 0;
-	text-align:center; 
+	text-align: center; 
 }
 
 #previous {
-	float:left;
+	float: left;
 	width: 90px;
 }
 
@@ -297,13 +297,13 @@ body {
 	margin: 0 auto;
 	height: 20px;
 	padding: 0 0 20px 0;
-	text-align:center;
+	text-align: center;
 }
 
 /* WYBRANA KATEGORIA */
 
 .choosenCat {
-	background-color:#12487C;
+	background-color: #12487C;
 }
 
 /* FRASTEST */

@@ -36,13 +36,19 @@ class Statistics
     /**
      * @ORM\Column(type="integer")
      */
-    private $incorrect;
+    private $wrong;
+	
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $notAnswered;
 
     public function __construct($question, $user) {
 		$this->question = $question;
 		$this->user = $user;
 		$this->correct = 0;
-		$this->incorrect = 0;
+		$this->wrong = 0;
+		$this->notAnswered = 0;
     }
 	
 	public function getUser() {
@@ -57,15 +63,23 @@ class Statistics
 		return $this->correct;
 	}
 	
-	public function getIncorrect() {
-		return $this->incorrect;
+	public function getWrong() {
+		return $this->wrong;
 	}
-		
+	
+	public function getNotAnswered() {
+		return $this->notAnswered;
+	}
+
 	public function incrementCorrect() {
 		$this->correct++;
 	}
 	
-	public function incrementIncorrect() {
-		$this->incorrect++;
+	public function incrementWrong() {
+		$this->wrong++;
+	}
+	
+	public function incrementNotAnswered() {
+		$this->notAnswered++;
 	}
 }

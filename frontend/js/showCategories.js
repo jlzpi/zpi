@@ -9,8 +9,11 @@
 
 	$(document).ready(function() {
 		$.each(categories, function(index, value) {
-			if(file == 'finish.html') {
+			if(file == 'finish.html' || file == 'showTest.html') {
 				var src = 'showPicture.html?category=' + index;
+			}
+			else if(file == 'statistics.html') {
+				var src = 'categoryStatistics.html?category=' + index;
 			}
 			else {
 				var src = file + '?category=' + index;
