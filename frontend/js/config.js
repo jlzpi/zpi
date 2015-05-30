@@ -4,7 +4,8 @@ var PictureUrl = '../../files/';
 var User = {
 	isStudent: false,
 	isTeacher: false,
-	username: ''
+	username: '',
+	id: 0
 };
 
 var Global = {};
@@ -43,6 +44,7 @@ $.ajax({
 	url: ApiUrl + 'getUser',
 	dataType: 'json'
 }).done(function(data) {
+	User.id = data.user.id;
 	User.username = data.user.username;
 	User.isStudent = $.inArray('ROLE_STUDENT', data.user.roles)!=-1;
 	User.isTeacher = $.inArray('ROLE_TEACHER', data.user.roles)!=-1;

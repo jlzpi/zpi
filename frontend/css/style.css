@@ -175,10 +175,11 @@ body {
 
 #buttons {
 	margin: 20px 0 0 0;
-	text-align:center; 
+	text-align: center; 
 }
 
-#previous {	
+#previous {
+	float: left;
 	width: 90px;
 }
 
@@ -298,13 +299,13 @@ body {
 	margin: 0 auto;
 	height: 20px;
 	padding: 0 0 20px 0;
-	text-align:center;
+	text-align: center;
 }
 
 /* WYBRANA KATEGORIA */
 
 .choosenCat {
-	background-color:#12487C;
+	background-color: #12487C;
 }
 
 /* FRASTEST */
@@ -316,4 +317,8 @@ body {
 
 #allQuestions{
 	display: inline-block
+}
+=======
+#allQuestions {
+	padding: 40px 0px 0px 0px; 
 }

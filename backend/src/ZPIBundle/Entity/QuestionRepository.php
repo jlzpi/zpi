@@ -4,6 +4,36 @@ use Doctrine\ORM\EntityRepository;
 use ZPIBundle\Entity\Question;
 class QuestionRepository extends EntityRepository
 {	
+	public function getNumberOfQuestions() {
+		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
+		
+		$query = $rep
+			->createQueryBuilder('Question')
+			->select('COUNT(Question.id)')
+		;
+		
+		return $query
+			->getQuery()
+			->getSingleScalarResult()
+		;
+	}
+
+	public function getNumberOfQuestionsFromCategory($category) {
+		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
+		
+		$query = $rep
+			->createQueryBuilder('Question')
+			->select('COUNT(Question.id)')
+			->where('Question.category = :category')
+			->setParameter('category', $category)
+		;
+		
+		return $query
+			->getQuery()
+			->getSingleScalarResult()
+		;
+	}
+
 	public function findQuestionsByCategory($c) {
 		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
 		
@@ -82,5 +112,5 @@ class QuestionRepository extends EntityRepository
 			->setMaxResults($limit)
 			->getResult()
 		;
-	}	
+	}
 }

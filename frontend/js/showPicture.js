@@ -49,11 +49,16 @@ $.ajax({
 		howManyButtons = lessonLength;
 	}
 	
-	$(document).ready(function() {				
+	var questionAnswers = {};
+	
+	$(document).ready(function() {
 		$('#question').html(questions[index]);
 		$('#picture').attr('src', PictureUrl+directories[index]);
 		$('#picture').css('display', 'block');
 		$('#buttons').css('display', 'block');
+		if(typeof questionAnswers[ids[index]] === 'undefined') {
+			questionAnswers[ids[index]] = 2;
+		}
 
 		Global.questionId = ids[index];
 		
@@ -87,6 +92,9 @@ $.ajax({
 				Global.buttonIndex = index;
 				resetAnswer();
 				chosenPicture(lessonLength, index);
+				if(typeof questionAnswers[ids[index]] === 'undefined') {
+					questionAnswers[ids[index]] = 2;
+				}
 			}
 		});
 	
@@ -99,10 +107,14 @@ $.ajax({
 				Global.buttonIndex = index;
 				resetAnswer();
 				chosenPicture(lessonLength, index);
+				if(typeof questionAnswers[ids[index]] === 'undefined') {
+					questionAnswers[ids[index]] = 2;
+				}
 			}
 		});
 			
 		$('#finish').click(function() {
+
 			var action = 'finish.html';
 			var stats = {
 				lesson: json.CategoryName,
@@ -111,13 +123,34 @@ $.ajax({
 				notAnswered: lessonLength
 			};
 			$.each(Global.answered, function(index, val) {
-				if(typeof val === 'undefined') stats.notAnswered++;
-				else if(val.answerImg == PictureUrl + 'icons/correctAnswer.png') stats.correct++;
-				else if(val.answerImg == PictureUrl + 'icons/wrongAnswer.png') stats.wrong++;
-				else stats.notAnswered++;
+				if(typeof val === 'undefined') {
+					stats.notAnswered++;
+					questionAnswers[index] = 2;
+				}
+				else if(val.answerImg == PictureUrl + 'icons/correctAnswer.png') {
+					stats.correct++;
+					questionAnswers[index] = 1;
+				}
+				else if(val.answerImg == PictureUrl + 'icons/wrongAnswer.png') {
+					stats.wrong++;
+					questionAnswers[index] = 0;
+				}
+				else {
+					stats.notAnswered++;
+					questionAnswers[index] = 2;
+				}
 				stats.notAnswered--;
 			});
 			if(confirm("Jesteś pewny, że chcesz zakończyć lekcję?")) {
+				$.ajax({
+					type: 'POST',
+					url: ApiUrl+'setStatistics',
+					data: {
+						questionAnswers: JSON.stringify(questionAnswers),
+						userId: User.id
+					}
+				});
+				
 				setCookie('stats', JSON.stringify(stats), 1);
 				location.href = action;
 				console.log('test');
