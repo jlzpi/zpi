@@ -95,13 +95,23 @@ function loadQ() {
 				dataType: 'json'
 		}).done(function(js) {
 
+			$("#nowaOdpowiedz").on("click",function(e) {
+				e.preventDefault();
+				addAnswerPanel(null,null);
+			});
+
 			var answers=js.question.answers;
 			//console.log("ans "+answers);
+
+			$("#answers_and_keys").empty();
 			$.each(answers, function(key,val) {
 				var answer=val.answer;
 				var keywords=val.key_words.split(";");
 
-				var answerBox=$('<input type="text" class="answer"/>');
+
+				addAnswerPanel(answer,keywords);
+
+				/*var answerBox=$('<input type="text" class="answer"/>');
 				$(answerBox).val(answer);
 
 				$("#answers_and_keys").empty();
@@ -118,7 +128,7 @@ function loadQ() {
 					$("#answers_and_keys").append(keyBox);
 					$("#answers_and_keys").append("<br/>");
 				});
-				$("#answers_and_keys").append("<br/>");
+				$("#answers_and_keys").append("<br/>");*/
 			});
 
 		})
@@ -153,6 +163,8 @@ function loadQ() {
 			//AJAX W AJAXIE
 
 					var answ = [];
+
+					console.log("L: "+$(".answer").length);
 
 					for (var i = 0; i < $(".answer").length; i++) {
 						var keys="";
@@ -197,4 +209,74 @@ function loadQ() {
 			});
 			
 		});
+}
+
+
+
+function addAnswerPanel(answer,keywords) {
+
+	var divAnswerPane=$('<div class="answerPane"></div>')
+	divAnswerPane.id="answerPane"+$(".answerPane").length;
+
+	var answerBox=$('<input type="text" class="answer"/>');
+	if (answer!=null)
+				$(answerBox).val(answer);
+
+
+				$(divAnswerPane).append("<p>Odpowiedź:</p>");
+
+				var usunOdp=$('<button>Usuń odpowiedź</button>');
+				$(usunOdp).on("click", function(e) {
+					e.preventDefault();
+					$(divAnswerPane).remove();					
+				});
+				$(divAnswerPane).append(usunOdp);
+
+				$(divAnswerPane).append(answerBox);
+				$(divAnswerPane).append("<br/>");
+				$(divAnswerPane).append("<p>Klucze:</p>");
+
+				var numAnswers=$(".answer").length;
+				
+				var dodajKlucz=$('<button>Dodaj klucz</button>');
+				$(dodajKlucz).on("click", function(e) {
+					e.preventDefault();
+					var keyBox=$('<input type="text" class="keyy key'+numAnswers+'"/>');
+					$(divAnswerPane).append(keyBox);
+					var usunKlucz=$('<button class="deleteKey">Usuń klucz</button>');
+					$(usunKlucz).on("click", function(f) {
+						f.preventDefault();
+						$(keyBox).remove();
+						$(usunKlucz).remove();
+					});
+					$(divAnswerPane).append(keyBox);
+					$(divAnswerPane).append(usunKlucz);
+
+				});
+
+				$(divAnswerPane).append(dodajKlucz);
+			
+			if (keywords!=null){
+				$.each(keywords, function(k,v) {
+					var keyBox=$('<input type="text" class="keyy key'+numAnswers+'"/>');
+					$(keyBox).val(v);
+
+					$(divAnswerPane).append(keyBox);
+					var usunKlucz=$('<button class="deleteKey">Usuń klucz</button>');
+					$(usunKlucz).on("click", function(f) {
+						f.preventDefault();
+						$(keyBox).remove();
+						$(usunKlucz).remove();
+					});
+
+					$(divAnswerPane).append(usunKlucz);
+
+					$(divAnswerPane).append("<br/>");
+				});
+			}
+
+	$("#answers_and_keys").append(divAnswerPane);			
+	$("#answers_and_keys").append("<br/>");
+
+
 }
