@@ -50,7 +50,8 @@ $.ajax({
 					Global.questionId = ids[index];
 					Global.buttonIndex = index;
 					resetAnswer(); 
-					chosenPicture(testLength, index); }
+					chosenPicture(testLength, index);
+				}
 			});
 			$('#allQuestions').append($but);
 		}

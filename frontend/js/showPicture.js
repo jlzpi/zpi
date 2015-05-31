@@ -75,8 +75,11 @@ $.ajax({
 					navigationButtons(index, howManyButtons, lessonLength);
 					Global.buttonIndex = index;
 					resetAnswer(); 
-					chosenPicture(lessonLength, index); 					
+					chosenPicture(lessonLength, index); 
+					if(typeof questionAnswers[ids[index]] === 'undefined') {
+						questionAnswers[ids[index]] = 2;
 					}
+				}
 			});
 			$('#allQuestions').append($but);
 		}
