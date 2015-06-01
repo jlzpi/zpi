@@ -1,6 +1,6 @@
 var questions;
 var current=0;
-var idCat=3;
+var idCat=5;
 
 
 
@@ -17,6 +17,7 @@ $.ajax({
 				return;
 			}
 		//console.log(categories);
+		
 		$("#dalej").click(function (e){
 			e.preventDefault();
 			
