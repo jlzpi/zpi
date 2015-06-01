@@ -1,6 +1,8 @@
 var questions;
 var current=0;
-var idCat=1;
+var idCat=3;
+
+
 
 $.ajax({
 	type: 'GET',
@@ -30,6 +32,14 @@ $.ajax({
 				current=current-1;
 			loadQ();
 			return;
+		});
+
+
+
+		$("#nowaOdpowiedz").click(function(e) {
+				e.preventDefault();
+				addAnswerPanel(null,null);
+				return;
 		});
 		
 		$(document).ready(loadQ);
@@ -95,10 +105,7 @@ function loadQ() {
 				dataType: 'json'
 		}).done(function(js) {
 
-			$("#nowaOdpowiedz").on("click",function(e) {
-				e.preventDefault();
-				addAnswerPanel(null,null);
-			});
+			
 
 			var answers=js.question.answers;
 			//console.log("ans "+answers);
@@ -106,7 +113,7 @@ function loadQ() {
 			$("#answers_and_keys").empty();
 			$.each(answers, function(key,val) {
 				var answer=val.answer;
-				var keywords=val.key_words.split(";");
+				var keywords=val.key_words.split(/ +/);
 
 
 				addAnswerPanel(answer,keywords);
@@ -137,13 +144,17 @@ function loadQ() {
 		alert("Wystąpił błąd :(");
 	});
 
-	var edytowano=false;
+	//var edytowano=false;
 		$('#edytuj').prop('onclick',null).off('click');
 		$("#edytuj").click(function (e){
 			
 			
-			if (edytowano) return;
+			/*if (edytowano) {
+				edytowano=false;
+				loadQ();
+				return;
 
+			}*/
 			var qu=$("#quest").val();
 			e.preventDefault();
 			var URL=$("#pictureURL").val();
@@ -164,12 +175,12 @@ function loadQ() {
 
 					var answ = [];
 
-					console.log("L: "+$(".answer").length);
+					//console.log("L: "+$(".answer").length);
 
 					for (var i = 0; i < $(".answer").length; i++) {
 						var keys="";
 						$.each($(".key"+i),function(){
-							keys+=$(this).val()+";";
+							keys+=$(this).val()+" ";
 						});
 						keys=keys.substring(0,keys.length-1);
 
@@ -181,7 +192,23 @@ function loadQ() {
 						};
 					};
 
-					
+					//change category
+
+
+					$.ajax({
+						type: 'GET',
+						url: ApiUrl + 'panel/changeQuestionCategory/'+id+'/'+$(":radio:checked").val(),
+						dataType: 'json'
+					}).done(function(json) {
+
+					}).fail(function(json){
+						alert("Wystąpił błąd :((");
+
+					});
+
+
+
+
 
 					$.ajax({
 						method: 'POST',
@@ -193,8 +220,9 @@ function loadQ() {
 					}).done(function(data) {
 
 						alert("Zmieniono.");
-						edytowano=true;
-						$("#edytuj").click();
+						loadQ();
+						//edytowano=true;
+						//$("#edytuj").click();
 						
 					}).fail(function(a,b,c) {
 						alert("Nie można było zmienić pytania :(");
