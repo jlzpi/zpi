@@ -18,7 +18,7 @@ class QuestionRepository extends EntityRepository
 		;
 	}
 
-	public function getByQuestionAndCategory($q, $c) {
+	public function getByQuestionAndCategory($p, $q, $c) {
 		$rep = $this->getEntityManager()->getRepository('ZPIBundle:Question');
 		
 		$query = $rep
@@ -28,6 +28,8 @@ class QuestionRepository extends EntityRepository
 			->setParameter('category',$c)
 			->andWhere('Question.question = :question')
 			->setParameter('question',$q)
+			->andWhere('Question.picture = :picture')
+			->setParameter('picture',$p)
 		;
 		
 		return $query

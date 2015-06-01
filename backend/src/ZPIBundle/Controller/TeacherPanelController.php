@@ -445,7 +445,7 @@ class TeacherPanelController extends FOSRestController {
 		$_question = $request->request->get('question');
 		$answers = $request->request->get('answers');
 
-		$question = $em->getRepository('ZPIBundle:Question')->getByQuestionAndCategory($_question, $category);
+		$question = $em->getRepository('ZPIBundle:Question')->getByQuestionAndCategory($_picture, $_question, $category);
 		if (is_null($question) || !$question instanceof Question) {
 			$question = new Question($_picture, $_question, $em->getRepository('ZPIBundle:Category')->find($category));
 		}
