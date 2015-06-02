@@ -1,0 +1,19 @@
+#page {
+	display: inline-block;
+	width: 100%;
+    min-height: 300px;
+	
+	margin: 0 auto;
+}
+
+p {
+	display: inline-block;
+}
+
+#categoriesList {
+	list-style: none;
+}
+
+#categoriesList a {
+	text-decoration: none;
+}
