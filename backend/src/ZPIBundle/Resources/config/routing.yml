@@ -13,3 +13,12 @@ chooseCategory_controller:
 checkAnswer_controller:
     type: rest
     resource: ZPIBundle\Controller\CheckAnswerController
+
+teacherPanel_controller:
+    type: rest
+    prefix: /panel
+    resource: ZPIBundle\Controller\TeacherPanelController
+
+statistics_controller:
+    type: rest
+    resource: ZPIBundle\Controller\StatisticsController

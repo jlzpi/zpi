@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ZPIBundle\Entity\Category;
 use Symfont\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="ZPIBundle\Entity\AnswerRepository")
@@ -28,11 +29,13 @@ class Answer
 	
     /**
      * @ORM\Column(type="string", length=200)
+	 * @Groups({"question_with_answers"})
      */
 	private $answer;
 	
     /**
      * @ORM\Column(type="string", length=200)
+	 * @Groups({"question_with_answers"})
      */
 	private $keyWords;
 	

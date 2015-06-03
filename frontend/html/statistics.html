@@ -2,14 +2,17 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Kurs angielskiego</title>
+		<title>Kurs angielskiego - statystyki</title>
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<link rel="stylesheet" type="text/css" href="../css/statistics.css">
 
 		<script type="text/javascript" src="../js/jquery-2.1.3.js"></script>
 		<script type="text/javascript" src="../js/config.js"></script>
+		<script type="text/javascript" src="../js/highcharts.js"></script>
 
 		<script type="text/javascript" src="../js/logout.js"></script>
-		<script type="text/javascript" src="../js/showCategories.js"></script>	
+		<script type="text/javascript" src="../js/showCategories.js"></script>
+		<script type="text/javascript" src="../js/statistics.js"></script>
 	</head>
 
 	<body> 
@@ -17,7 +20,7 @@
 			<div id="logoutContainer">
 				<div id="blockOuter">
 					<div>Jesteś zalogowany jako: <a href="#" id="user" class="white"></a></div>
-					<button class="buttons" id="logout" type="submit">Wyloguj</button>
+					<div><a href="#" id="logout" class="white">Wyloguj</a></div>
 				</div>
 			</div>
 		
@@ -43,11 +46,15 @@
 			<div id="container">
 				<div id="page">
 					<div id="content">
-						<div id="hello">
-							<h2>Witaj!</h2>
-							<p>Aby rozpocząć naukę wybierz jedną z kategorii po lewej stronie.</p>	
-							<p>Możesz również spróbować swoich sił w teście, składającym się z 10 pytań, dotyczących różnych kategorii.</p>	<p>Owocnej nauki! :)</p>							
-						</div>											
+						<ul id="statList">
+							<li id="count"></li>
+							<li id="notAnswered"></li>
+							<li id="learned"></li>
+						</ul>
+						
+						<div id="emptyStats">Brak statystyk</div>
+						<div id="columnChart"></div>
+						<button class="buttons" id="clear">Wyczyść statystykę</button>
 					</div>
 				</div>
 				<div id="sidebar"><div>
@@ -56,7 +63,7 @@
 						<ul id="categoriesList"></ul>
 					</div>
 					<div id="test">
-						<a href="showTest.html">Test</a>
+						<a href="statistics.html">Ogółem</a>
 					</div>
 				</div></div>
 			</div>

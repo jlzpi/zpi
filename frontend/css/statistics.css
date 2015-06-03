@@ -1,0 +1,16 @@
+/* STATYSTYKI */
+#clear {
+	display: none;
+}
+
+#emptyStats {
+	display: none;
+	margin-top: 100px;
+	text-align: center;
+	font-size: 50px;
+}
+
+#statList {
+	display: none;
+	margin-top: 40px;
+}

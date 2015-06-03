@@ -66,18 +66,20 @@ console.log("start");
 	});
 
 	recognition.onresult=function (event) {
-	
+	//if (recognizing){
 console.log("res" + event.resultIndex +" - "+event.results.length);
 		for (var i = event.resultIndex; i < event.results.length; ++i) {
 			if (event.results[i].isFinal) {
-				$("#textarea").val($("#textarea").val()+event.results[i][0].transcript);
+				$("#textarea").val($("#textarea").val()+" "+event.results[i][0].transcript);
 				console.log(event.results[i][0].transcript);
 			}
 		}
+		//}
 	};
 	
 	recognition.onend=function(event) {
-		recognition.start();
+		if (recognizing)
+			recognition.start();
 	}
 
 	$('#send').click(function() {

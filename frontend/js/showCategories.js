@@ -4,10 +4,23 @@
 	dataType: 'json'
 }).done(function(json) {
 	var categories = json.Categories;
+	var pathname = window.location.pathname;
+	var file = pathname.slice(pathname.lastIndexOf("/") + 1);
 
 	$(document).ready(function() {
 		$.each(categories, function(index, value) {
-			var src = 'showPicture.html?category=' + index;
+			if(file == 'finish.html' || file == 'showTest.html') {
+				var src = 'showPicture.html?category=' + index;
+			}
+			else if(file == 'statistics.html') {
+				var src = 'categoryStatistics.html?category=' + index;
+			}
+			else if(file == 'start.html') {
+				var src = 'showPicture.html?category=' + index;
+			}
+			else {
+				var src = file + '?category=' + index;
+			}
 			var result = value.link(src);
 			var li = $('<li></li>');
 			li.html(result);
