@@ -1,12 +1,9 @@
 var questions;
 var current=0;
-var idCat=5;
-
-
 
 $.ajax({
 	type: 'GET',
-	url: ApiUrl + 'panel/getQuestions/'+idCat,
+	url: ApiUrl + 'panel/getQuestions/'+getGET('category'),
 	dataType: 'json'
 }).done(function(json) {
 		console.log("done");
@@ -54,7 +51,7 @@ function loadQ() {
 		console.log("load");
 		
 
-		$(":radio[value="+idCat+"]").attr("checked",true);	
+		$(":radio[value="+getGET('category')+"]").attr("checked",true);	
 		var question=questions[current];
 
 		var id=question.id;

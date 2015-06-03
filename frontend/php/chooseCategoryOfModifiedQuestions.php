@@ -4,12 +4,13 @@
 		<meta charset="utf-8">
 		<title>Kurs angielskiego - lekcja</title>
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
-		<link rel="stylesheet" type="text/css" href="../css/loading.css">
+		<link rel="stylesheet" type="text/css" href="../css/tp.css">
 
 		<script type="text/javascript" src="../js/jquery-2.1.3.js"></script>
 		<script type="text/javascript" src="../js/config.js"></script>
 
 		<script type="text/javascript" src="../js/logout.js"></script>
+		<script type="text/javascript" src="../js/loadCategoriesOfModifiedQuestions.js"></script>
 	</head>
 
 	<body> 
@@ -46,5 +47,7 @@
 			<div id="container">
 				<div id="page">
 				<div id="content">	
-					
-		
+					<h3>Wybierz kategorię, z której chcesz modyfikować pytania:</h3>
+					<ul id="categoriesList"></ul>
+
+<?php include("footer.php"); ?>

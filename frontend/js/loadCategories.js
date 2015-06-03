@@ -27,7 +27,7 @@ $.ajax({
 			$('#label').before("<br/>");
 		});
 		
-		$(".radio:first").attr("checked",true);		
+		$(":radio[value="+getGET('category')+"]").attr("checked",true);
 	});
 }).fail(function(a, b, c) {
 	if (typeof a.responseJSON !== 'undefined') {
