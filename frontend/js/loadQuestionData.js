@@ -1,23 +1,20 @@
 var questions;
 var current=0;
+var zmianaKategorii=false;
 
-$.ajax({
-	type: 'GET',
-	url: ApiUrl + 'panel/getQuestions/'+getGET('category'),
-	dataType: 'json'
-}).done(function(json) {
-		console.log("done");
-		questions = json.questions;
-		if (questions.length==0) 
-			{
-				alert("Brak pytań.");
+
+	
+
+		$(document).ready(function (e) {
+				$("#dalej").click(function (e){
+			e.preventDefault();
+			console.log(" z "+zmianaKategorii);
+			if (zmianaKategorii){
+				getQ();
 				return;
 			}
-		//console.log(categories);
-		
-		$("#dalej").click(function (e){
-			e.preventDefault();
-			
+
+			console.log(" L "+questions.length);
 			if (current+1<questions.length)
 				current=current+1;
 			loadQ();
@@ -26,6 +23,11 @@ $.ajax({
 
 		$("#wstecz").click(function (e){
 			e.preventDefault();
+			if (zmianaKategorii){
+				getQ();
+				return;
+			}
+
 			if (current-1>=0)
 				current=current-1;
 			loadQ();
@@ -39,19 +41,46 @@ $.ajax({
 				addAnswerPanel(null,null);
 				return;
 		});
-		
-		$(document).ready(loadQ);
-	
-}).fail(function(e) {
-	alert("Wystąpił błąd.");
-});
 
+			getQ();
+		});
+
+function getQ(){
+
+	zmianaKategorii=false;
+	$.ajax({
+		type: 'GET',
+		url: ApiUrl + 'panel/getQuestions/'+getGET('category'),
+		dataType: 'json'
+	}).done(function(json) {
+			console.log("done");
+			questions = json.questions;
+			if (questions.length==0) 
+				{
+					alert("Brak pytań.");
+					return;
+				}
+			if (current>=questions.length)
+				current=0;
+			//console.log(categories);
+			
+			
+			loadQ();
+		
+	}).fail(function(e) {
+		alert("Wystąpił błąd.");
+	});
+
+}
 
 function loadQ() {
-		console.log("load");
+		console.log("load"+getGET('category'));
+				
+
+		$(":radio[value="+getGET('category')+"]").prop("checked",true);	
+		
 		
 
-		$(":radio[value="+getGET('category')+"]").attr("checked",true);	
 		var question=questions[current];
 
 		var id=question.id;
@@ -192,18 +221,19 @@ function loadQ() {
 
 					//change category
 
+					if ($(":radio:checked").val()!=getGET('category')){
+						zmianaKategorii=true;
+						$.ajax({
+							type: 'GET',
+							url: ApiUrl + 'panel/changeQuestionCategory/'+id+'/'+$(":radio:checked").val(),
+							dataType: 'json'
+						}).done(function(json) {
 
-					$.ajax({
-						type: 'GET',
-						url: ApiUrl + 'panel/changeQuestionCategory/'+id+'/'+$(":radio:checked").val(),
-						dataType: 'json'
-					}).done(function(json) {
+						}).fail(function(json){
+							alert("Wystąpił błąd :((");
 
-					}).fail(function(json){
-						alert("Wystąpił błąd :((");
-
-					});
-
+						});
+					}
 
 
 
