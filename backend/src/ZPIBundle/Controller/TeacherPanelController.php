@@ -254,6 +254,45 @@ class TeacherPanelController extends FOSRestController {
 	}
 	
 	/**
+	 *  zmien kategorie pytaniu
+	 *  @Rest\Get("/changeQuestionCategory/{id}/{categoryId}",
+	 *		requirements={
+	 *			"id"="\d+",
+	 *			"categoryId"="\d+"
+	 *		}
+	 *	)
+	 *
+	 *  @ApiDoc(
+	 *		section="panel nauczyciela"
+	 *  )
+	 *
+	 *  @Secure(roles="ROLE_TEACHER")
+	 */
+	public function changeQuestionCategoryAction(Request $request, $id, $categoryId) {
+		$em = $this->getDoctrine()->getManager();
+
+		$question = $em->getRepository('ZPIBundle:Question')->find($id);
+		
+		if (is_null($question) || !$question instanceof Question) {
+			throw $this->createNotFoundException('Question not found');
+		}
+		
+		$category = $em->getRepository('ZPIBundle:Category')->find($categoryId);
+		
+		if (is_null($category) || !$category instanceof Category) {
+			throw $this->createNotFoundException('Category not found');
+		}
+		$question->setCategory($category);
+		
+		$em->persist($question);
+		$em->flush();
+		
+		return array(
+			'question' => $question
+		);
+	}
+	
+	/**
 	 *  Usun pytanie
 	 *  @Rest\Get("/deleteQuestion/{id}")
 	 *

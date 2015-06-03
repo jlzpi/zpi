@@ -22,14 +22,17 @@
 	overflow-y: scroll;
 }
 
+.answerPane {
+	padding: 7px;
+	background-color: #DBE3DE;
+
+}
 
 ul {
 	list-style-type: none;
 }
 
-li {
-	padding-bottom: 5px;
-}
+
 
 li > a{
 
@@ -59,3 +62,44 @@ input[type=text] {
 	width:100%;
 }
 
+input[type=text].keyy {
+	width: 80%;
+}
+
+.deleteKey {
+	width: 15%;
+}
+
+
+p {
+	display: inline-block;
+}
+
+button,
+input[type=submit] {
+	background-color: #12487C;
+	color: white;
+	padding: 3px 5px;
+	border: none;
+}
+
+#buttonContainer {
+	text-align: center;
+}
+
+#mainPage {
+	background-image: url("../../files/icons/teacher.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: auto;
+	height: 600px;
+	margin: 0 20px 0 40px;
+}
+
+h1 {
+	color: white;
+}
+
+.margin {
+	margin: 130px 0 0 130px;
+}

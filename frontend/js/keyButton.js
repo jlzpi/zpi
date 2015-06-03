@@ -68,7 +68,9 @@ $(document).ready(function() {
 		
 		var n = url.lastIndexOf('/');
 		var result = "pictures"+url.substring(n);
-	
+		keys=keys.substring(0,keys.length-1); //usuń ostatnią spację
+		console.log("k "+keys+"/");
+
 		var asd = [{
 			answer: answer,
 			keyWords: keys
