@@ -5,15 +5,23 @@ $.ajax({
 }).done(function(data) {
 	$(document).ready(function() {
 		$.each(data.pictures, function(index, val) {
-			var img=document.createElement("img");
-			img.className+=" thumb";
+			var div = document.createElement("div");
+			var img = document.createElement("img");
+			img.className+="thumb";
 			img.src=PictureUrl+'pictures/'+val;
-			
-			var opt = $('<input type="checkbox" class="chb" name="kategorie">');
+			var opt = document.createElement("input");
+			opt.type = "checkbox";
+			opt.className = "chb";
+			opt.name = "kategorie";
+			//var opt = $('<input type="checkbox" class="chb" name="kategorie">');
 			$(opt).val(img.src);
-			$("#images2").append(opt);
-			$("#images2").append(img);//$("<img class='thumb' src="+dir+result+ "></img>"));
-        	$("#images2").append("<br>");
+			
+			div.appendChild(opt);
+			div.appendChild(img);			
+			$("#images2").append(div);			
+			//$("#images2").append(opt);
+			//$("#images2").append(img);//$("<img class='thumb' src="+dir+result+ "></img>"));
+        	//$("#images2").append("<br>");
 		});
 	});
 }).fail(function(a, b, c) {

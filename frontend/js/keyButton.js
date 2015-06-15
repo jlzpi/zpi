@@ -5,6 +5,7 @@ $(document).ready(function() {
 		var deleteKey=document.createElement("input");
 		deleteKey.type="submit";
 		deleteKey.id="delBut"+numItems;
+		deleteKey.className="accept";
 		$(deleteKey).val("Usuń");//attr("value","Usuń");
 		//var t = document.createTextNode("Usuń");       // Create a text node
 		//deleteKey.appendChild(t);                                // Append the text to <button>
@@ -23,7 +24,6 @@ $(document).ready(function() {
 		console.log(newKey.name);
 		
 		var div = document.createElement("div");
-		$(div).css("display","block");
 		$(div).append(newKey);
 		$(div).append(deleteKey);
 		$("#keysDiv").append(div);

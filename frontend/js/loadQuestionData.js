@@ -272,6 +272,7 @@ function loadQ() {
 function addAnswerPanel(answer,keywords) {
 
 	var divAnswerPane=$('<div class="answerPane"></div>')
+	var divKeysPane=$('<div class="keysPane"></div>')
 	divAnswerPane.id="answerPane"+$(".answerPane").length;
 
 	var answerBox=$('<input type="text" class="answer"/>');
@@ -279,60 +280,64 @@ function addAnswerPanel(answer,keywords) {
 				$(answerBox).val(answer);
 
 
-				$(divAnswerPane).append("<p>Odpowiedź:</p>");
+				//$(divAnswerPane).append("<p>5) Zmień istniejące odpowiedzi:</p>");
 
-				var usunOdp=$('<button>Usuń odpowiedź</button>');
+				var usunOdp=$('<button class="accept">Usuń odpowiedź</button>');
 				$(usunOdp).on("click", function(e) {
 					e.preventDefault();
 					$(divAnswerPane).remove();					
 				});
+				
+				$(divAnswerPane).append(answerBox);
 				$(divAnswerPane).append(usunOdp);
 
-				$(divAnswerPane).append(answerBox);
-				$(divAnswerPane).append("<br/>");
-				$(divAnswerPane).append("<p>Klucze:</p>");
+				
+				//$(divAnswerPane).append("<br/>");
+				$(divKeysPane).append('<p id="textKey">Dodaj słowo kluczowe do odpowiedzi:</p>');
 
 				var numAnswers=$(".answer").length;
 				
-				var dodajKlucz=$('<button>Dodaj klucz</button>');
+				var dodajKlucz=$('<button class="buttons">Dodaj klucz</button>');
 				$(dodajKlucz).on("click", function(e) {
 					e.preventDefault();
 					var keyBox=$('<input type="text" class="keyy key'+numAnswers+'"/>');
-					$(divAnswerPane).append(keyBox);
-					var usunKlucz=$('<button class="deleteKey">Usuń klucz</button>');
+					$(divKeysPane).append(keyBox);
+					var usunKlucz=$('<button class="accept">Usuń klucz</button>');
 					$(usunKlucz).on("click", function(f) {
 						f.preventDefault();
 						$(keyBox).remove();
 						$(usunKlucz).remove();
 					});
-					$(divAnswerPane).append(keyBox);
-					$(divAnswerPane).append(usunKlucz);
+					$(divKeysPane).append(keyBox);
+					$(divKeysPane).append(usunKlucz);
 
 				});
 
-				$(divAnswerPane).append(dodajKlucz);
-			
+				$(divKeysPane).append(dodajKlucz);
+				$(divKeysPane).append('<p>Zmień istniejące słowa kluczowe:</p>');
+				
+			    $(divAnswerPane).append(divKeysPane);
 			if (keywords!=null){
 				$.each(keywords, function(k,v) {
 					var keyBox=$('<input type="text" class="keyy key'+numAnswers+'"/>');
 					$(keyBox).val(v);
 
-					$(divAnswerPane).append(keyBox);
-					var usunKlucz=$('<button class="deleteKey">Usuń klucz</button>');
+					$(divKeysPane).append(keyBox);
+					var usunKlucz=$('<button class="accept">Usuń klucz</button>');
 					$(usunKlucz).on("click", function(f) {
 						f.preventDefault();
 						$(keyBox).remove();
 						$(usunKlucz).remove();
 					});
 
-					$(divAnswerPane).append(usunKlucz);
+					$(divKeysPane).append(usunKlucz);
 
-					$(divAnswerPane).append("<br/>");
+					$(divAnswerPane).append(divKeysPane);
 				});
 			}
 
 	$("#answers_and_keys").append(divAnswerPane);			
-	$("#answers_and_keys").append("<br/>");
+	//$("#answers_and_keys").append("<br/>");
 
 
 }

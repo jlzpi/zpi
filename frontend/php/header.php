@@ -4,7 +4,8 @@
 		<meta charset="utf-8">
 		<title>Kurs angielskiego - lekcja</title>
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
-		<link rel="stylesheet" type="text/css" href="../css/loading.css">
+		<link rel="stylesheet" type="text/css" href="../css/teacherPane.css">
+		<link rel="stylesheet" type="text/css" href="../css/login.css">
 
 		<script type="text/javascript" src="../js/jquery-2.1.3.js"></script>
 		<script type="text/javascript" src="../js/config.js"></script>
@@ -14,10 +15,10 @@
 
 	<body> 
 		<div id="wrapper">
-			<div id="logoutContainer">
+			<div id="logContainer">
 				<div id="blockOuter">
 					<div>Jesteś zalogowany jako: <a href="#" id="user" class="white"></a></div>
-					<div><a href="#" id="logout" class="white">Wyloguj</a></div>
+					<button class="buttons" id="logout" type="submit">Wyloguj</button>
 				</div>
 			</div>
 		
@@ -43,8 +44,7 @@
 			<div id="header" class="ribboncontainer">
 				<div class="ribbon"><h1>Interaktywna nauka angielskiego</h1></div>
 			</div>
-			<div id="container">
-				<div id="page">
-				<div id="content">	
+			<div id="container2">
+				<div id="content2">	
 					
 		

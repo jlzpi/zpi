@@ -5,10 +5,13 @@ $.ajax({
 }).done(function(data) {
 	$(document).ready(function() {
 		$.each(data.pictures, function(index, val) {
-			var img=document.createElement("img");
+			var img = document.createElement("img");
+			var div = document.createElement("div");
 			img.className+=" thumb";
+			div.className+=" thumbDiv";
 			img.src=PictureUrl+'pictures/'+val;
-			$("#images").append(img);
+			div.appendChild(img);
+			$("#images").append(div);
 		});
 		
 		$(".thumb").on("click", function(e){ 

@@ -32,7 +32,7 @@
 			$('#categoriesList').append(li);
 		});
 		
-		if(typeof Global.isTest !== 'undefined' && Global.isTest) {
+		if(typeof Global.isTest !== 'undefined' && Global.isTest || Global.isAllStatictics) {
 			var x = $('#test');
 			x.attr('class', 'choosenCat');
 		}

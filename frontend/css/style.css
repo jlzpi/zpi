@@ -18,51 +18,6 @@ body {
 	box-shadow: 0 1px 5px rgba(0,0,0,0.2);
 }
 
-/* LOGOWANIE */
-
-.white {
-	color: #FFF;
-}
-
-#logoutContainer {
-	width: 300px;
-	height: 120px;
-	background-color: #12487C;
-	margin: 20px -20px 0px auto;
-	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
-	color: #FFF;
-	text-align: center;
-	display: table;
-}
-
-#blockOuter {
-	display: table-cell;
-	vertical-align: middle;
-}
-
-#loginForm label {
-	display: block;
-}
-
-#login {
-	margin-top:20px;
-}
-
-#test_zaloguj, #logout{
-	margin-top: 10px;
-	background-color: #1969ba;
-	width: 90px;
-}
-
-#test_zaloguj:hover, #logout:hover {
-	background-color: #2A5A89;
-}
-
-#test_zaloguj:active, #logout:active{
-	background-color: #2A5A89;
-	box-shadow:inset 2px 2px 5px rgba(0,0,0,0.5);;
-}
-
 /* NAGŁÓWEK */
 
 .ribboncontainer {
@@ -148,9 +103,9 @@ body {
 }
 
 #menu a:hover {
-	margin-top: -9px;
+	margin-top: -10px;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
-	height: 23px;
+	height: 25px;
 }
 
 /* STRONA */
@@ -158,21 +113,23 @@ body {
 #page {
 	display: inline-block;
 	width: 708px;
-    min-height: 300px;
 	float: right;
 	margin: 0 auto;
+	//margin-bottom: 40px;
 }
 
 /* KONTENER NA PANEL BOOCZNY I PAGE */
 
 #container {
 	margin-left: -22px;
-	margin-bottom: 40px;
     overflow: hidden;
     position: relative;
-    width: 930px;
+    height: 100%;
+    min-height: 350px;
     
 }
+
+/* KONTENER DLA STRONY Z LOGOWANIEM */
 
 #container2 {
 	margin-bottom: 40px;
@@ -209,18 +166,12 @@ body {
 	text-align: center; 
 }
 
-#previous {
+#previous, #next{
 	width: 90px;
 }
 
-#finish {
-	width: 90px;
-}
-
-#next {
-
-	width: 90px;
-
+#toggleMic, #send, #finish{
+	width: 140px;
 }
 
 .buttons {
@@ -258,7 +209,7 @@ body {
  	background-image: url("../../files/icons/mikro.png");
  	background-repeat: no-repeat;
  	background-size: contain;
- 	padding-left: 30px;
+ 	padding-left: 20px;
 }
 
 #micIcon {
@@ -275,21 +226,24 @@ body {
 	opacity: 0;
 }
 
+#answer{
+	height: 30px;
+}
+
 /* PANEL BOCZNY */
 
 #sidebar {
 	display: inline-block;	
 	width: 180px;
-	padding: 20px 0px 20px 40px;
+	padding: 20px 0px 0px 40px;
 	float: left;
 	margin-top: 40px;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
 	color: #FFF;
-	min-height: 300px;
-	margin-bottom: -10000px;
-	padding-bottom: 10000px;
 	background-color: #1969ba;
 	margin-left: 2px;
+	margin-bottom: -99999px;
+ 	padding-bottom: 99999px;
 }
 
 #sidebar > div {
