@@ -109,8 +109,10 @@ function loadQ() {
 				//TODO: alert z potwierdzeniem
 				
 				alert("Usunięto.");
-				usunieto=true;
-				$("#usun").click();
+				getQ();//tocheck2
+				//loadQ();//tocheck2
+				//usunieto=true;
+				//$("#usun").click();
 
 			}).fail(function(a,b,c) {
 				alert("Nie można było usunąć pytania");
@@ -220,7 +222,7 @@ function loadQ() {
 					};
 
 					//change category
-
+					//zmianaKategorii=true; //tocheck	
 					if ($(":radio:checked").val()!=getGET('category')){
 						zmianaKategorii=true;
 						$.ajax({
@@ -248,6 +250,7 @@ function loadQ() {
 					}).done(function(data) {
 
 						alert("Zmieniono.");
+						getQ();//tocheck
 						loadQ();
 						//edytowano=true;
 						//$("#edytuj").click();

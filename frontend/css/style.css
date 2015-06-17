@@ -149,8 +149,9 @@ body {
 /* WYŚWIETLANY OBRAZEK */
 
 #picture {
-	height: auto;
-	width: 600px;
+	margin: 0 auto;
+	width: auto;
+	max-height: 300px;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
 }
 
