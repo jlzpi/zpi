@@ -9,22 +9,19 @@ $.ajax({
 		$.each(categories, function(index, value) {
 			var result = value;//.link(src);
 			
-			var opt = $('<input type="radio" class="radio" name="kategorie"/>');
-			var span= $('<span></span>');
-			
-			
-			span.html(result);
-			
+			var opt = $('<input type="radio" class="radio" name="kategorie">');		
 			opt.attr("value", index); //to check
+			opt.attr("id", index);
+
+			var label = $('<label for='+index+'>'+result+'</label>');				
 			
 			if (index == getGET('category')) {
 				opt.attr('class', 'choosenCat');
 			}
-
-			
-			$('#label').before(opt);
-			$('#label').before(span);
-			$('#label').before("<br/>");
+						
+			$('#categories').append(opt);
+			$('#categories').append(label);
+			$('#categories').append("</br>");		
 		});
 		
 		$(":radio[value="+getGET('category')+"]").attr("checked",true);

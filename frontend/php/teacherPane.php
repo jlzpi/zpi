@@ -1,8 +1,6 @@
 <?php include("header.php"); ?>
-</div>
-<div id="mainPage">
 
-<h1><p class="margin">Welcome!</p></h1>
-</div>
+	<p class="text">Witaj w panelu nauczyciela!</p>
+	<img id="imgTeacher" src="../../files/icons/teacher.jpg">
 
 <?php include("footer.php"); ?>

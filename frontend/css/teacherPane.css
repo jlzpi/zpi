@@ -1,0 +1,173 @@
+/* OGOLNY WYGLAD */
+
+#content2 {	
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom:5px;
+}
+
+#content2 h2{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+#imgTeacher {
+	margin-left: auto;
+    margin-right: auto;
+    display: block;
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
+	margin-top: 20px;
+}
+
+/* WYBIERANIE OBRAZKA */
+
+#images {	
+	height:350px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	margin-bottom: 30px;
+}
+
+.thumb {
+	width:100px;
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.55);
+}
+
+/* WYBRANY OBRAZEK */
+
+.big {	
+	outline: 4px solid red;
+  	outline-offset: -2px;
+}
+
+.thumbDiv {
+	display: inline-block;
+	padding: 20px;
+}
+
+/* WYBIERANIE KATEGORII */
+
+#categories {
+	margin-bottom: 12px;
+}
+
+input[type=text] {
+	width:100%;
+}
+
+.buttons {
+	min-width:90px;
+}
+
+/* OBRAZKI */
+
+#deletePic{
+	margin-top:10px;
+	margin-left:20px;
+}
+
+#images2 div{
+	display:inline-block; 
+	padding: 20px;
+}
+
+/* INPUT TYPE FILE */
+.fileUpload{
+	margin-left:2px;
+	margin-bottom:6px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+ 	visibility: hidden;
+ 	width:95px;
+ 	outline: none;
+ 	padding-top:10px; 
+ 	margin-bottom:10px;	
+}
+
+.custom-file-input:focus{
+   outline: 0;
+}
+
+.custom-file-input::before {
+  content: 'Wybierz plik';
+  display: inline-block;
+  background-color: #12487C;
+  border: none;
+  padding-top:8px;
+  padding-bottom:8px;
+  width:90px;
+  text-align:center;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  color: #FFF;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.55);
+}
+
+.custom-file-input:hover::before {
+  background-color: #2A5A89;
+}
+
+.custom-file-input:active::before {
+  	background-color: #2A5A89;
+	box-shadow:inset 2px 2px 5px rgba(0,0,0,0.5);;
+}
+
+#sendImage{
+	margin-top:6px;
+	margin-left:2px;
+}
+
+/* BUTTONY */
+.editBut, .accept, .decline{
+	background-color: #1969ba;
+	position: relative;
+	color: #FFF;
+	border: none;
+	height: 20px;
+	margin-bottom:12px;
+	margin-top:4px;
+	min-width: 90px;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.55);
+}
+
+.editBut, .decline {
+	margin-left:10px;
+}
+
+#dodajKategorie, #submit{
+	margin-top:12px;
+}
+
+/* EDYTUJ PYTANIE */
+#edytuj, #usun{
+	background-color: #1969ba;
+}
+
+#buttonContainer{
+	text-align:center;
+	margin-bottom:12px;
+}
+
+#picture {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:30px;
+}
+
+#textKey{
+	margin-top:0px;
+}
+
+.keysPane{
+	margin-left:40px;
+}
+
+.answerPane{
+	margin-top:12px;
+}

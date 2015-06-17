@@ -1,6 +1,8 @@
 /* STATYSTYKI */
+
 #clear {
 	display: none;
+	float: right
 }
 
 #emptyStats {
@@ -12,5 +14,18 @@
 
 #statList {
 	display: none;
+	float:left
+}
+
+.secondRow {
+	padding-left: 15px;
+}
+
+#block{
 	margin-top: 40px;
+}
+
+#clearFloat {
+	padding-top: 20px;
+	clear:both;
 }

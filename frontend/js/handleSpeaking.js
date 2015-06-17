@@ -51,7 +51,7 @@ console.log("stop");
 			recognition.stop();
 			recognizing = false;  
 			$("#textarea").attr("disabled",false);
-			$("#toggleMic").text("Start speaking");
+			$("#toggleMic").text("Włącz mikrofon");
 			$('#toggleMic').css("background-image", url+"mikro.png')");
 		}
 		else {
@@ -60,7 +60,7 @@ console.log("start");
 			recognition.start();
 			recognizing = true;
 			$("#textarea").attr("disabled",true);
-			$("#toggleMic").text("Stop speaking");
+			$("#toggleMic").text("Wyłącz mikrofon");
 			$('#toggleMic').css("background-image", url+"mikroDis.png')");
 		}
 	});

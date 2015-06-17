@@ -6,9 +6,9 @@ $(document).ready(function() {
 	}).done(function(json) {
 		$('#clear').css('display', 'block');
 		$('#statList').css('display', 'block');
-		$('#count').html('Liczba pytań z kategorii: ' + json.Count);
-		$('#notAnswered').html('Liczba pytań bez odpowiedzi: ' + json.NotAnswered);
-		$('#learned').html('Liczba opanowanych pytań: ' + json.Learned);
+		$('#count').html(json.Count);
+		$('#notAnswered').html(json.NotAnswered);
+		$('#learned').html(json.Learned);
 		
 		$('#pieChart').highcharts({
 			chart: {

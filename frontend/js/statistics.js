@@ -1,3 +1,5 @@
+Global.isAllStatictics = true;
+
 $(document).ready(function() {
 	$.ajax({
 		type: 'GET',
@@ -6,9 +8,9 @@ $(document).ready(function() {
 	}).done(function(json) {
 		$('#clear').css('display', 'block');
 		$('#statList').css('display', 'block');
-		$('#count').html('Liczba wszystkich pytań: ' + json.Count);
-		$('#notAnswered').html('Liczba pytań bez odpowiedzi: ' + json.NotAnswered);
-		$('#learned').html('Liczba opanowanych pytań: ' + json.Learned);
+		$('#count').html(json.Count);
+		$('#notAnswered').html(json.NotAnswered);
+		$('#learned').html(json.Learned);
 		
 		var tab = json.StatsFromCategories;
 		
